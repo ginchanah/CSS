@@ -1,0 +1,473 @@
+:root {
+    /* head */
+    --head-width: 60px;
+
+    /* neck */
+    --neck-length: calc(var(--head-width) / 3);
+    --neck-offset: calc(var(--neck-length) * 0.2);
+    --neck-bottom-position: calc(var(--neck-length) * -1 + var(--neck-offset));
+    --whole-head-length: calc(var(--head-width) + var(--neck-length) - var(--neck-offset));
+    /* torso */
+    --torso-length: calc(var(--head-width) * 2);
+    --torso-width: calc(var(--torso-length) / 2.3);
+    --torso-top-position: var(--whole-head-length);
+    --torso-offset: calc(var(--torso-width) * 1.2);
+    --whole-torso-length: calc(var(--torso-length) * 2 - var(--torso-offset));
+    /* arms */
+    --arm-width: calc(var(--head-width) / 2.5);
+    --arm-length: var(--torso-length);
+    --arm-offset: var(--arm-width);
+    /* lowerbody */
+    --lowerbody-offset: calc(var(--whole-torso-length) + var(--whole-head-length) - var(--leg-width));
+    /* legs */
+    --leg-width: calc(var(--torso-width) / 1.5);
+    --leg-length: calc(var(--torso-width) * 3);
+    --leg-offset: var(--leg-width);
+    --whole-leg-length: calc(var(--leg-length) * 2 - var(--leg-offset));
+    /* feet */
+    --foot-height: var(--leg-width);
+    --foot-offset: calc(var(--foot-height) / 2);
+    --foot-length: calc(var(--foot-height) * 2);
+
+
+    --whole-body-height: calc(var(--whole-head-length) + var(--whole-torso-length) + var(--whole-leg-length)); 
+
+
+    /* colors */
+    --body-color: blue;
+    --arm-color: red;
+    --arm-color-2: green;
+
+    /* z-index */
+    --z-index-arm-front: 1000;
+    --z-index-middle: 500;
+    --z-index-leg-front: 100;
+    --z-index-leg-back: 50;
+    --z-index-arm-back: 0;
+
+    
+}
+
+
+/* align poppetje */
+main {
+    height: 100vh;
+    display: grid;
+    justify-items: center;
+    align-content: center;
+}
+
+::after, ::before {
+    display: inline-block;
+    position: absolute;
+}
+
+
+main > div * {
+    position: absolute;
+}
+
+/* main form */
+main > div {
+    height: var(--whole-body-height);
+    display: grid;
+    justify-items: center;
+    
+
+
+    /* torso */
+    > div {
+        display: grid;
+        justify-items: center;
+        position: relative;
+        height: var(--torso-length);
+        width: var(--torso-width);
+        top: var(--torso-top-position);
+
+        /* uppertorso */
+        > div:first-of-type {
+            display: grid;
+            justify-items: center;
+            top: 0;
+
+            /* upper torso visible */
+            &::after {
+                content: '';
+                top: 0;
+                height: var(--torso-length);
+                width: var(--torso-width);
+                background: var(--body-color);
+                z-index: var(--z-index-middle);
+            }
+
+            /* head */
+            > div:first-of-type {
+                width: var(--head-width);
+                aspect-ratio: 1/1;
+                background: var(--body-color);
+                border-radius: 50%;
+                top: calc(var(--whole-head-length) * -1);
+
+                /* neck */
+                &::after {
+                    content: '';
+                    height: var(--neck-length);
+                    width: calc(var(--neck-length) / 1.3);
+                    background: var(--body-color);
+                    bottom: var(--neck-bottom-position);
+                    right: 37%;
+                }
+            }
+
+            /* back arm */
+            > div:nth-of-type(2) {
+                display: block;
+                position: absolute;
+                height: var(--torso-length);
+                width: var(--arm-width);
+                background: var(--arm-color);
+                top: 0;
+                z-index: var(--z-index-arm-back);
+                
+                /* lower arm */
+                > div {
+                    display: block;
+                    position: absolute;
+                    height: var(--arm-length);
+                    width: var(--arm-width);
+                    background: var(--arm-color);
+                    top: calc(var(--arm-length) - var(--arm-offset));
+
+                    /* hand */
+                    > div {
+                        
+                    }
+                }
+            }
+
+            /* front arm */
+            > div:nth-of-type(3) {
+                display: block;
+                height: var(--arm-length);
+                width: var(--arm-width);
+                background: var(--arm-color-2);
+                top: 0;
+                z-index: var(--z-index-arm-front);
+
+                /* lower arm */
+                > div {
+                    display: block;
+                    position: absolute;
+                    height: var(--arm-length);
+                    width: var(--arm-width);
+                    background: var(--arm-color-2);
+                    top: calc(var(--arm-length) - var(--arm-offset));
+
+                    /* hand */
+                    > div {
+
+                    }
+                }
+            }
+
+
+        }
+
+        /* lower torso */
+        > div:nth-of-type(2) {
+            display: block;
+            height: var(--torso-length);
+            width: var(--torso-width);
+            top: var(--torso-offset);
+            z-index: var(--z-index-middle);
+            background: var(--body-color);
+
+            /* lower body container */
+            > div {
+                position: relative;
+                display: grid;
+                top: calc(var(--torso-length) - var(--leg-width));
+                width: var(--torso-width);
+                height: var(--whole-leg-length);
+                
+                /* leg front */
+                > div:first-of-type {
+                    justify-self: start;
+                    z-index: var(--z-index-leg-front);
+                    width: var(--torso-width);
+        
+                    /* upper leg */
+                    > div:first-of-type {
+                        background: var(--arm-color);
+                        width: var(--leg-width);
+                        height: var(--leg-length);
+                        top: 0;
+        
+                    }
+                    /* lower leg */
+                    > div:nth-of-type(2) {
+                        background: var(--arm-color);
+                        width: var(--leg-width);
+                        height: var(--leg-length);
+                        top: calc(var(--leg-length) - var(--leg-offset));
+                        
+                        
+                        /* foot */
+                        > div{
+                            bottom: calc(var(--foot-offset) * -1);
+                            width: var(--foot-length);
+                            height: var(--foot-height);
+                            background: var(--arm-color);
+                        }
+                    }
+                }
+                /* leg back */
+                > div:nth-of-type(2) {
+                    justify-self: end;
+                    z-index: var(--z-index-leg-back);
+                    width: var(--torso-width);
+                    display: grid;
+        
+                    /* upper leg */
+                    > div:first-of-type {
+                        justify-self: end;
+                        background: var(--arm-color-2);
+                        width: var(--leg-width);
+                        height: var(--leg-length);
+                        top: 0;
+                    }
+                    /* lower leg */
+                    > div:nth-of-type(2) {
+                        justify-self: end;
+                        background: var(--arm-color-2);
+                        width: var(--leg-width);
+                        height: var(--leg-length);
+                        top: calc(var(--leg-length) - var(--leg-offset));
+                        /* foot */
+                        > div {
+                            bottom: calc(var(--foot-offset) * -1);
+                            width: var(--foot-length);
+                            height: var(--foot-height);
+                            background: var(--arm-color-2);
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+}
+
+
+
+
+/* first step */
+mai n > div {
+    /* torso */
+    > div {
+        /* lower torso */
+        > div:nth-of-type(2) {
+            /* lower body container */
+            > div {
+                /* leg front */
+                > div:first-of-type {
+                    transform: rotate(-40deg);
+                    /* upper leg */
+                    > div:first-of-type {
+                    }
+                    /* lower leg */
+                    > div:nth-of-type(2) {
+                        transform-origin: 10% 10%;
+                        transform: rotate(60deg);
+                        /* foot */
+                        > div{
+                            transform: rotate(40deg);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* second step */
+main > div {
+    /* torso */
+    > div {
+        /* uppertorso */
+        > div:first-of-type {
+            height: 100%;
+            transform-origin: bottom right;
+            transform: rotate(10deg);
+            /* upper torso visible */
+            &::after {
+                
+            }
+            /* head */
+            > div:first-of-type {
+                /* neck */
+                &::after {
+                }
+            }
+
+            /* back arm */
+            > div:nth-of-type(2) {
+                /* lower arm */
+                > div {
+                    /* hand */
+                    > div {
+                    }
+                }
+            }
+
+            /* front arm */
+            > div:nth-of-type(3) {
+                /* lower arm */
+                > div {
+                    /* hand */
+                    > div {
+                    }
+                }
+            }
+
+
+        }
+
+        /* lower torso */
+        > div:nth-of-type(2) {
+            transform: translateY(20px);
+            /* lower body container */
+            > div {
+                /* leg front */
+                > div:first-of-type {
+                    transform: rotate(-120deg);
+                    /* upper leg */
+                    > div:first-of-type {
+                    }
+                    /* lower leg */
+                    > div:nth-of-type(2) {
+                        transform-origin: 40% 10%;
+                        transform: rotate(120deg);
+                        /* foot */
+                        > div{
+                            transform: rotate(40deg);
+                        }
+                    }
+                }
+                /* leg back */
+                > div:nth-of-type(2) {
+                    
+                    /* upper leg */
+                    > div:first-of-type {
+                        transform-origin: 10% 20%;
+                        transform: rotate(-32deg);
+                    }
+                    /* lower leg */
+                    > div:nth-of-type(2) {
+                        transform-origin: 10% 100%;
+                        transform: rotate(20deg) translateY(-40px) translateX(-3px);
+                        /* foot */
+                        > div {
+                            transform: rotate(-20deg);
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* aanpassen voor transforms!! */
+main > div {
+    /* torso */
+    > div {
+        /* uppertorso */
+        > div:first-of-type {
+            /* upper torso visible */
+            &::after {
+            }
+            /* head */
+            > div:first-of-type {
+                /* neck */
+                &::after {
+                }
+            }
+
+            /* back arm */
+            > div:nth-of-type(2) {
+                /* lower arm */
+                > div {
+                    /* hand */
+                    > div {
+                    }
+                }
+            }
+
+            /* front arm */
+            > div:nth-of-type(3) {
+                /* lower arm */
+                > div {
+                    /* hand */
+                    > div {
+                    }
+                }
+            }
+
+
+        }
+
+        /* lower torso */
+        > div:nth-of-type(2) {
+            /* lower body container */
+            > div {
+                /* leg front */
+                > div:first-of-type {
+                    /* upper leg */
+                    > div:first-of-type {
+                    }
+                    /* lower leg */
+                    > div:nth-of-type(2) {
+                        /* foot */
+                        > div{
+                        }
+                    }
+                }
+                /* leg back */
+                > div:nth-of-type(2) {
+                    /* upper leg */
+                    > div:first-of-type {
+                    }
+                    /* lower leg */
+                    > div:nth-of-type(2) {
+                        /* foot */
+                        > div {
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+}
+
+
+
+
+
+
