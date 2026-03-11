@@ -37,7 +37,7 @@ This week I learned a lot during the introduction exercise. I already did Cyd's 
 Other than that I didn't start on my code yet for the final exercise but I am happy with my idea. I'll make Maja the Bee in CSS and then make her walk silly! I think other than the animation my biggest challenge will building my Maja from CSS and actually making her look nice.
 
 ## Week 2
-### Day
+### Day 2
 What did I do today?
 - I spend the whole day on making the outline for my skeleton in CSS. I had already made an HTML outline, and I went off of that in my CSS. I tried to work with variables, that would make the body stay in ratio to itself. I also decided that I would use basic shapes first and then do the actual design of Maja the Bee later.
 ![Variables](assets/readme-images/variables.png)
@@ -52,4 +52,32 @@ What did I learn?
 
 What will I do tomorrow?
 - Try to work more on actually making it look like Maja the Bee and then start animating
+
+### Day 3 
+What did I do today?
+- I thought I figured out how to do the structure of the skeleton, but when I transformed elements, my z-index structure broke. I asked Nils about it, and apparently I have to redo my whole skeleton. Apparently I couldn't leave it like this. Sad. But I tried again and figured out a HTML structure that works (again, hopefully).
+![skeleton2](assets/readme-images/skeleton2.png)
+- I decided to use layers to work from my basic structure towards my Maja the Bee. That way I can keep the basic styling and can keep going back to my begin point if I want to.
+
+
+-omzetten transforms en animation
+
+
+## Bronnen
+Skeleton structure by Nils: https://codepen.io/enbee81/pen/ByLKLOQ?editors=1100
+Skeleton structure by Julia Miocene: https://miocene.io/post/css-character-skeleton/
+CSS character design: https://www.youtube.com/watch?v=LKwbGLv1Re4
+Walk cycle by Sanne: https://codepen.io/shooft/pen/myrbrGa
+Fancy border radius: https://9elements.github.io/fancy-border-radius/#70.51.68.51--474.374
+
+
+# To-Do
+- Typografie, sensational title 
+- Interactie
+- Use one other technique: @layer, cotainer query, style query, @function, if()
+- responsive
+- two themes
+
+
+
 
