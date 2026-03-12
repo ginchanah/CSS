@@ -16,6 +16,7 @@
     --whole-torso-length: calc(var(--torso-length) * 2 - var(--torso-offset));
     /* arms */
     --arm-width: calc(var(--head-width) / 2.5);
+    --arm-width-half: calc((var(--arm-width) / 2));
     --arm-length: var(--torso-length);
     --arm-offset: var(--arm-width);
     /* lowerbody */
@@ -37,8 +38,10 @@
 
     /* colors */
     --body-color: blue;
-    --arm-color: red;
-    --arm-color-2: green;
+    --arm-color: hotpink;
+    --arm-color-2:yellow;
+    --leg-color:red;
+    --leg-color-2:green;
 
     /* z-index */
     --z-index-arm-front: 5;
@@ -50,6 +53,9 @@
     /* walk variables */
     --translate-walk-height: 2rem;
 
+
+    /* transition */
+    --transition-time: 2s;
     
 }
 
@@ -62,20 +68,36 @@ main {
     display: grid;
     justify-items: center;
     align-content: center;
+    position: relative;
 }
 
 ::after, ::before {
     display: inline-block;
 }
 
-aside {
-    background: hotpink;
-}
-
 
 main * {
     position: absolute;
     border-radius: 99rem;
+}
+
+div:has(>label) {
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+}
+
+label {
+
+    display: grid;
+    width: 40vw;
+    
+    input {
+        position: relative;
+        width: clamp(1rem 40vw 20rem);
+    }
 }
 
 @layer basicpoppetje {
@@ -89,7 +111,7 @@ main * {
         
         
         /* body */
-        > div {
+        > div:nth-of-type(2) {
             display: grid;
             justify-items: center;
             position: relative;
@@ -143,6 +165,7 @@ main * {
                     background: var(--arm-color);
                     top: 0;
                     z-index: var(--z-index-arm-front);
+                    transform-origin: var(--arm-width-half) var(--arm-width-half);
         
                     &:nth-of-type(2) {
                         background: var(--arm-color-2);
@@ -158,10 +181,11 @@ main * {
                         width: var(--arm-width);
                         background: inherit;
                         top: calc(var(--arm-length) - var(--arm-offset));
+                        transform-origin: var(--arm-width-half) var(--arm-width-half);
         
                         /* hand */
                         > div {
-                            
+                            transform-origin: var(--arm-width-half) var(--arm-width-half);
                         }
                     }
                 }
@@ -192,7 +216,7 @@ main * {
                         justify-self: start;
                         position: absolute;
                         z-index: var(--z-index-leg-front);
-                        background: var(--arm-color);
+                        background: var(--leg-color);
                         width: var(--leg-width);
                         height: var(--leg-length);
                         top: var(--leg-top-position);
@@ -205,7 +229,7 @@ main * {
                             justify-self: end;
                             z-index: var(--z-index-leg-back);
                             display: grid;
-                            background: var(--arm-color-2);
+                            background: var(--leg-color-2);
                             width: var(--leg-width);
                             height: var(--leg-length);
                             transform-origin: var(--leg-width-half) var(--leg-width-half);
@@ -232,9 +256,6 @@ main * {
                     }
                 }
             }
-
-    
-    
             
         }
     }
@@ -247,7 +268,7 @@ main * {
         
 
         /* body */
-        > div {
+        > div:nth-of-type(2) {
             
 
             /* upper body */
@@ -326,454 +347,306 @@ main * {
                     }
                 }
             }
-
-    
-    
-            
         }
     }
 }
 
-:root {
-    --translate-y-body: calc(var(--root-size) *2);
-    --translate-x-body: calc(var(--root-size) *0.5);
-    --translate-y-leg: calc(var(--translate-y-body) *-1);
-    --translate-x-leg: calc(var(--root-size) *-0.7);
+
+/* **************** */
+/* MARK: Body properties
+/* **************** */
+
+@property --bodyMovementTranslateY {
+    syntax: "<length-percentage>";
+    inherits: false;
+    initial-value: 0px;
 }
 
-
-/* first step */
-
-@keyframes --body-movement {
-    0% {
-        transform: translateY(0) translateX(0);
-    }
-    100% {
-        transform: translateY(calc(var(--root-size) *2)) translateX(calc(var(--root-size) *0.5));
-    }
-}
-
-@keyframes --upper-leg-front-step1 {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(-120deg);
-    }
-    
-}
-
-@keyframes --lower-leg-front-step1 {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(120deg);
-    }
-}
-
-@keyframes --upper-leg-back-step1 {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(-30deg);
-    }
-}
-
-@keyframes --lower-leg-back-step1 {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(30deg);
-    }
-}
-
-@keyframes --back-foot-step1 {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(-10deg);
-    }
+@property --bodyMovementTranslateX {
+    syntax: "<length-percentage>";
+    inherits: false;
+    initial-value: 0px;
 }
 
 /* body */
-main > div > div:first-of-type {
-    animation: --body-movement 2s infinite linear alternate;
-
-    /* transform: translateY(var(--translate-y-body)) translateX(var(--translate-x-body)); */
-
-    /* leg front */
-    section:nth-of-type(1) {
-        transform: translateY(var(--translate-y-leg));
-    }
-
-    /* legs back */
-    section:nth-of-type(2) {
-        transform: translateY(var(--translate-y-leg)) translateX(var(--translate-x-leg)) rotate(-10deg);
-
-        /* lower leg */
-        >div {
-            transform: rotate(20deg);
-
-            /* foot */
-            div {
-                transform: rotate(-10deg);
-            }
-        }
-        
-    }
-
+main > div:nth-of-type(2) > div:first-of-type {
+    transform: translateY(var(--bodyMovementTranslateY)) translateX(var(--bodyMovementTranslateX));
+    transition: var(--transition-time);
 }
 
-/* front leg */
-sec tion:nth-of-type(1) {
-    animation: --upper-leg-front-step1 2s infinite linear alternate;
+/* **************** */
+/* MARK: Leg properties
+/* **************** */
+@property --upper-leg-rotation {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
 
-    /* lower leg */
-    > div {
-        animation: --lower-leg-front-step1 2s infinite linear alternate;
-    }
+@property --lower-leg-rotation {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
+
+@property --upper-leg-back-rotation {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
+
+@property --lower-leg-back-rotation {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
+
+@property --translate-y-upper-leg {
+    syntax: "<length-percentage>";
+    inherits: true;
+    initial-value: 0px;
+}
+
+@property --translate-x-upper-leg {
+    syntax: "<length-percentage>";
+    inherits: true;
+    initial-value: 0px;
+}
+
+@property --translate-y-upper-leg-back {
+    syntax: "<length-percentage>";
+    inherits: true;
+    initial-value: 0px;
+}
+
+@property --foot-back-rotation {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
+
+
+
+/* front leg */
+section:nth-of-type(1) {
+    transform: 
+        translateY(var(--translate-y-upper-leg))
+        rotate(var(--upper-leg-rotation)) 
+        translateX(var(--translate-x-upper-leg));
+
+    transition: var(--transition-time);
+}
+
+/* lower leg */
+section:nth-of-type(1) > div {
+    transform: rotate(var(--lower-leg-rotation));
+    transition: var(--transition-time);
 }
 
 /* back leg */
-sect ion:nth-of-type(2) {
-    animation: --upper-leg-back-step1 2s infinite linear alternate;
+section:nth-of-type(2) {
+    transform: 
+        translateY(var(--translate-y-upper-leg-back))
+        translateX(calc(var(--translate-x-upper-leg)*0.2))
+        rotate(var(--upper-leg-back-rotation));
     
-    /* lower leg */
-    > div {
-        animation: --lower-leg-back-step1 2s infinite linear alternate;
-        
-        /* foot */
-        > div{
-            animation: --back-foot-step1 2s infinite linear alternate;
-        }
+    transition: var(--transition-time);
+
+    
+}
+
+/* back lower leg */
+section:nth-of-type(2) > div {
+    transform: rotate(var(--lower-leg-back-rotation)) ;
+    transition: var(--transition-time);
+
+    
+}
+
+/* back foot */
+section:nth-of-type(2) > div > div {
+    transform: rotate(var(--foot-back-rotation));
+    transition: var(--transition-time);
+}
+
+
+/* **************** */
+/* MARK: Arm properties
+/* **************** */
+@property --upper-arm-rotation {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
+
+@property --lower-arm-rotation {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
+
+@property --upper-arm-back-rotation {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
+
+@property --lower-arm-back-rotation {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
+
+/* front upper arm */
+aside:first-of-type {
+    transform: rotate(var(--upper-arm-rotation));
+    transition: var(--transition-time);
+}
+
+/* front back arm */
+aside:first-of-type > div {
+    transform: rotate(var(--lower-arm-rotation));
+    transition: var(--transition-time);
+}
+
+/* front upper arm */
+aside:nth-of-type(2) {
+    transform: rotate(var(--upper-arm-back-rotation));
+    transition: var(--transition-time);
+}
+
+/* front back arm */
+aside:nth-of-type(2) > div {
+    transform: rotate(var(--lower-arm-back-rotation));
+    transition: var(--transition-time);
+}
+
+/* **************** */
+/* MARK: Walk container styles
+/* **************** */
+
+/* ****** */
+/*  MARK: stap 1
+/* ***** */
+
+@container style(--walk >= 1) {
+    /* body transform */
+	main > div:nth-of-type(2) > div:first-of-type {
+		--bodyMovementTranslateY: calc(var(--root-size) *2);
+        --bodyMovementTranslateX: calc(var(--root-size) *0.5);
+	}
+
+    /* upper leg front */
+    
+    section:nth-of-type(1) {
+        --upper-leg-rotation: -120deg;
+        --translate-y-upper-leg:  calc(var(--translate-walk-height)*-1);
+        --translate-x-upper-leg: calc(var(--translate-walk-height) *-1);
     }
-}
 
+    /* lower leg front */
+    section:nth-of-type(1) > div {
+        --lower-leg-rotation: 120deg;
+    }
 
-
-div:has(>section) {
-    
-}
-
-
-
-mai n {
-    
-    /* body */
-    > div {
-    
-    
-        /* upper body */
-        > div:first-of-type {
-            
-        
-    
-            /* head */
-            > header {
-    
-    
-                /* neck */
-                &::after {
-                }
-            }
-    
-            /* upper torso */
-            &::after {
-    
-            }
-    
-            /* back arm */
-            > aside {
-    
-                &:nth-of-type(2) {
-                
-                    
-                }
-                
-                /* lower arm */
-                > div {
-                
-    
-                    /* hand */
-                    > div {
-                        
-                    }
-                }
-            }
-    
-    
-            /* lower torso */
-            > div {
-            
-            
-                
-    
-                /* lower torso visible */
-                &::after {
-                    
-                }
-    
-            
-                    
-                /* legs */
-                > section {
-                    
-                    /* leg front */
-                    &:nth-of-type(1) {
-                    
-    
-                        /* lower leg */
-                        > div {
-                            
-                        }
-                    }
-                    
-    
-                    /* back leg */
-                    &:nth-of-type(2) {
-                    
-                        
-                    }
-    
-                    /* lower leg */
-                    > div {
-                        
-                        
-                        /* foot */
-                        > div{
-                            
-                        }
-                    }
-                }
-            }
-        }
-    
-    
-    
+    /* upper leg back */
+    section:nth-of-type(2) {
+        --upper-leg-back-rotation: -10deg;
+        --translate-y-upper-leg-back: calc(var(--root-size) *-2);
         
     }
 
-}
+    /* lower leg back */
+    section:nth-of-type(2) > div {
+        --lower-leg-back-rotation: 20deg;
 
-
-
-
-
-
-/* first step */
-mai n > div {
-    /* torso */
-    > div {
-        /* lower torso */
-        > div:nth-of-type(2) {
-            /* lower body container */
-            > div {
-                /* leg front */
-                > div:first-of-type {
-                    transform: rotate(-40deg);
-                    /* upper leg */
-                    > div:first-of-type {
-                    }
-                    /* lower leg */
-                    > div:nth-of-type(2) {
-                        transform-origin: 10% 10%;
-                        transform: rotate(60deg);
-                        /* foot */
-                        > div{
-                            transform: rotate(40deg);
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-
-/* second step */
-mai n > div {
-    /* torso */
-    > div {
-        /* uppertorso */
-        > div:first-of-type {
-            height: 100%;
-            transform-origin: bottom right;
-            transform: rotate(10deg);
-            /* upper torso visible */
-            &::after {
-                
-            }
-            /* head */
-            > div:first-of-type {
-                /* neck */
-                &::after {
-                }
-            }
-
-            /* back arm */
-            > div:nth-of-type(2) {
-                /* lower arm */
-                > div {
-                    /* hand */
-                    > div {
-                    }
-                }
-            }
-
-            /* front arm */
-            > div:nth-of-type(3) {
-                /* lower arm */
-                > div {
-                    /* hand */
-                    > div {
-                    }
-                }
-            }
-
-
-        }
-
-        /* lower torso */
-        > div:nth-of-type(2) {
-            transform: translateY(20px);
-            /* lower body container */
-            > div {
-                /* leg front */
-                > div:first-of-type {
-                    transform: rotate(-120deg);
-                    /* upper leg */
-                    > div:first-of-type {
-                    }
-                    /* lower leg */
-                    > div:nth-of-type(2) {
-                        transform-origin: 40% 10%;
-                        transform: rotate(120deg);
-                        /* foot */
-                        > div{
-                            transform: rotate(40deg);
-                        }
-                    }
-                }
-                /* leg back */
-                > div:nth-of-type(2) {
-                    
-                    /* upper leg */
-                    > div:first-of-type {
-                        transform-origin: 10% 20%;
-                        transform: rotate(-32deg);
-                    }
-                    /* lower leg */
-                    > div:nth-of-type(2) {
-                        transform-origin: 10% 100%;
-                        transform: rotate(20deg) translateY(-40px) translateX(-3px);
-                        /* foot */
-                        > div {
-                            transform: rotate(-20deg);
-                        }
-                    }
-                }
-            }
-        }
+        
         
     }
+
+    /* foot */
+    section:nth-of-type(2) > div > div {
+        --foot-back-rotation: -10deg;
+    }
+	
 }
 
+/* ****** */
+/*  MARK: stap 2
+/* ***** */
 
+@container style(--walk >= 2) {
+    /* body transform */
+	main > div:nth-of-type(2) > div:first-of-type {
+		--bodyMovementTranslateY: calc(var(--root-size) *8);
+        --bodyMovementTranslateX: ;
+	}
 
+    /* upper leg front */
+    
+    section:nth-of-type(1) {
+        --upper-leg-rotation: -90deg;
+        --translate-y-upper-leg:  calc(var(--translate-walk-height)*-1);
+        --translate-x-upper-leg: calc(var(--translate-walk-height) *-1);
+    }
 
+    /* lower leg front */
+    section:nth-of-type(1) > div {
+        --lower-leg-rotation: 120deg;
+    }
 
-
-
-
-
-
-
-
-
-
-
-/* aanpassen voor transforms!! */
-main > div {
-    /* torso */
-    > div {
-        /* uppertorso */
-        > div:first-of-type {
-            /* upper torso visible */
-            &::after {
-            }
-            /* head */
-            > div:first-of-type {
-                /* neck */
-                &::after {
-                }
-            }
-
-            /* back arm */
-            > div:nth-of-type(2) {
-                /* lower arm */
-                > div {
-                    /* hand */
-                    > div {
-                    }
-                }
-            }
-
-            /* front arm */
-            > div:nth-of-type(3) {
-                /* lower arm */
-                > div {
-                    /* hand */
-                    > div {
-                    }
-                }
-            }
-
-
-        }
-
-        /* lower torso */
-        > div:nth-of-type(2) {
-            /* lower body container */
-            > div {
-                /* leg front */
-                > div:first-of-type {
-                    /* upper leg */
-                    > div:first-of-type {
-                    }
-                    /* lower leg */
-                    > div:nth-of-type(2) {
-                        /* foot */
-                        > div{
-                        }
-                    }
-                }
-                /* leg back */
-                > div:nth-of-type(2) {
-                    /* upper leg */
-                    > div:first-of-type {
-                    }
-                    /* lower leg */
-                    > div:nth-of-type(2) {
-                        /* foot */
-                        > div {
-                        }
-                    }
-                }
-            }
-        }
+    /* upper leg back */
+    section:nth-of-type(2) {
+        --upper-leg-back-rotation: -40deg;
+        --translate-y-upper-leg-back: 0;
         
     }
+
+    /* lower leg back */
+    section:nth-of-type(2) > div {
+        --lower-leg-back-rotation: 140deg;
+
+        
+        
+    }
+
+    /* back foot */
+    section:nth-of-type(2) > div > div {
+        --foot-back-rotation: -10deg;
+    }
+
+
+
+    /* ARMS */
+    /* front upper arm */
+    aside:first-of-type {
+        --upper-arm-rotation: 70deg;
+        /* front lower arm */
+        >div {
+            --lower-arm-rotation: -120deg;
+        }
+    }
+
+    /* back upper arm */
+    aside:nth-of-type(2) {
+        --upper-arm-back-rotation: -70deg;
+        /* back lower arm */
+        >div {
+            --lower-arm-back-rotation: -120deg;
+        }
+    }
+	
 }
 
 
 
 
 
-/* Another body */
+
+
+
+
+
 
 
 

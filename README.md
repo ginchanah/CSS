@@ -58,9 +58,34 @@ What did I do today?
 - I thought I figured out how to do the structure of the skeleton, but when I transformed elements, my z-index structure broke. I asked Nils about it, and apparently I have to redo my whole skeleton. Apparently I couldn't leave it like this. Sad. But I tried again and figured out a HTML structure that works (again, hopefully).
 ![skeleton2](assets/readme-images/skeleton2.png)
 - I decided to use layers to work from my basic structure towards my Maja the Bee. That way I can keep the basic styling and can keep going back to my begin point if I want to.
+- I finally finished all my styling so my transforms and animations don't break the structure. I started on the animation but I did it a really complicated way and and the end of the day Nienke showed me how she works with @property and I realized that I also need to implement that. So time to start doing that next time.
+
+How long did it take
+- the whole day
+
+What did I learn?
+- finally how the skeleton structure works
+
+What will I do tomorrow?
+- implement @property finally annimate!!
 
 
--omzetten transforms en animation
+## Week 4
+### Dag 4
+What did I do today?
+- I animated!! and first I started by using keyframes, but after following Sannes workshop about container queries, I decided to use a slider and transform the skeleton with the values of my slider. So I did that the whole day and I finally have 3 steps in my silly walk animated and transformed!!
+- I did get really frustrated again because this whole subject long I had problems with the z-index and skeleton structure and then I animated and then I realized there was a better way with properties and did it all over again and then I decided on the slider transforms and did it all over AGAIN. So it feels like I am not very far, and only the last hour or so have I productively worked on doing something that I can probably just use for my final product, UNCHANGED.
+This really is a learning process.
+- I also followed Cyds workshop "gekke dingen in CSS"
+
+How long did it take
+- the whole day
+
+What did I learn?
+- How to work with the slider values and copple my transforms with custom properties to the values. And I finally transformed annd started on my silly walk :)
+
+What will I do tomorrow?
+- more steps to my silly walk, hopefully the styling for my Maja the Bee mode
 
 
 ## Bronnen
