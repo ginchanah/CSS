@@ -88,19 +88,39 @@ What will I do tomorrow?
 - more steps to my silly walk, hopefully the styling for my Maja the Bee mode
 
 
+### Dag 4
+What did I do today?
+- Today I worked on step 3 until 11 of my silly walk and finished it! It is now completely slide and transformable!
+- I also followed the maths and variable fonts workshops
+- Inbetween and afterwards I also worked on implementing a font (I used comic style fonts because I am using a cartoon character) and I also started working on my design for my second mode, not the skeleton mode but Maja the Bee! Finally.
+![skeleton3](/assets/readme-images/skeleton-final.png)
+![majathebee](/assets/readme-images/majabegin.png)
+
+How long did it take?
+- Workshops: 2 hours
+- Styling and transforms: 3,5 hours
+
+What did I learn?
+- That @layer doesn't work the way I want it to. And that maybe my life would have been easier if I had just used :has for the different themes.
+
+What will I do tomorrow? 
+- Finish my Maja the Bee styling, do some more fun stuff with fonts, maybe add a background
+
+
+
+
 ## Bronnen
-Skeleton structure by Nils: https://codepen.io/enbee81/pen/ByLKLOQ?editors=1100
-Skeleton structure by Julia Miocene: https://miocene.io/post/css-character-skeleton/
-CSS character design: https://www.youtube.com/watch?v=LKwbGLv1Re4
-Walk cycle by Sanne: https://codepen.io/shooft/pen/myrbrGa
-Fancy border radius: https://9elements.github.io/fancy-border-radius/#70.51.68.51--474.374
+- Skeleton structure by Nils: https://codepen.io/enbee81/pen/ByLKLOQ?editors=1100
+- Skeleton structure by Julia Miocene: https://miocene.io/post/css-character-skeleton/
+- CSS character design: https://www.youtube.com/watch?v=LKwbGLv1Re4
+- Walk cycle by Sanne: https://codepen.io/shooft/pen/myrbrGa
+- Fancy border radius: https://9elements.github.io/fancy-border-radius/#70.51.68.51--474.374
+- :after border https://stackoverflow.com/questions/28033616/adding-box-shadow-to-a-after-pseudo-element
+
 
 
 # To-Do
 - Typografie, sensational title 
-- Interactie
-- Use one other technique: @layer, cotainer query, style query, @function, if()
-- responsive
 - two themes
 
 
