@@ -68,7 +68,7 @@
   --translate-walk-height: 2rem;
 
   /* transition */
-  --transition-time: 2s;
+  --transition-time: 1s;
 }
 
 @layer basicpoppetje, bienemaja;
@@ -79,6 +79,10 @@
     --root-size: 0.8rem;
   }
 }
+
+/* *** */
+/*MARK: Layer basic
+/* **** */
 
 @layer basicpoppetje {
   /* general styling */
@@ -156,6 +160,7 @@
       span {
       }
     }
+    
   }
 
   /* main form */
@@ -192,6 +197,7 @@
           border-radius: 50%;
           top: calc(var(--whole-head-length) * -1);
           border: none;
+          box-shadow: none;
 
           /* neck */
           &::after {
@@ -203,6 +209,14 @@
             bottom: var(--neck-bottom-position);
             right: 37%;
             border: none;
+          }
+
+          div {
+            display: none;
+          }
+
+          &::before {
+            display: none;
           }
         }
 
@@ -338,7 +352,6 @@
           border: var(--maja-border);
           position: absolute;
           left: calc(var(--wing-width) * -1 + var(--root-size));
-
           box-shadow: calc(var(--wing-width) * -0.2) 0;
         }
 
@@ -347,7 +360,14 @@
           width: calc(var(--head-width) * 1.2);
           background: var(--maja-body-color);
           border: var(--maja-border);
-          box-shadow: 40px 2px 0 -35px var(--maja-body-color);
+
+          /* nose, antennas, hair */
+          box-shadow: calc(var(--root-size)*2.25) calc(var(--root-size)*0.1) 0 calc(var(--root-size)*-2.1) var(--maja-body-color),
+          calc(var(--root-size)*2.25) calc(var(--root-size)*0.1) 0 calc(var(--root-size)*-2) var(--color-black),
+          calc(var(--root-size)*1) calc(var(--root-size)*-4) 0 calc(var(--root-size)*-2.1) var(--maja-body-color),
+          calc(var(--root-size)*-1) calc(var(--root-size)*-4) 0 calc(var(--root-size)*-2.1) var(--maja-body-color),
+          calc(var(--root-size)*1) calc(var(--root-size)*-4) 0 calc(var(--root-size)*-1.95) var(--color-black),
+          calc(var(--root-size)*-1) calc(var(--root-size)*-4) 0 calc(var(--root-size)*-1.95) var(--color-black);
 
           /* neck */
           &::after {
@@ -358,6 +378,40 @@
             bottom: -9%;
             z-index: 5;
             height: 10%;
+          }
+
+          /* antennas */
+          &::before {
+            --height:calc(var(--root-size)*1.2);
+            position: absolute;
+            content: '';
+            top: calc(var(--height) *-0.9);
+            left: calc(var(--root-size)*1.4);
+            width: calc(var(--root-size)*0.2);
+            height: var(--height);
+            background-color: var(--color-black);
+
+            box-shadow: calc(var(--root-size)*1.9) 0 0 0 var(--color-black);
+          }
+
+          div {
+              display: block;
+              position: absolute;
+              width: calc(var(--root-size)*0.5);
+              height: calc(var(--root-size)*0.5);
+              background: var(--color-black);
+              top: 40%;
+              right: 10%;
+
+              box-shadow: calc(var(--root-size)*-3) calc(var(--root-size)*-1) 0 calc(var(--root-size)*1) var(--maja-hair-color),
+              calc(var(--root-size)*-1.6) calc(var(--root-size)*-1.5) 0 calc(var(--root-size)*1) var(--maja-hair-color),
+              calc(var(--root-size)*-3.7) calc(var(--root-size)*0.7) 0 calc(var(--root-size)*1.1) var(--maja-hair-color),
+              calc(var(--root-size)*-3.7) calc(var(--root-size)*0.7) 0 calc(var(--root-size)*1.1) var(--maja-hair-color),
+
+              
+              calc(var(--root-size)*-3) calc(var(--root-size)*-1) 0 calc(var(--root-size)*1.15) var(--color-black),
+              calc(var(--root-size)*-1.6) calc(var(--root-size)*-1.5) 0 calc(var(--root-size)*1.15) var(--color-black),
+              calc(var(--root-size)*-3.7) calc(var(--root-size)*0.7) 0 calc(var(--root-size)*1.25) var(--color-black);
           }
         }
 
@@ -380,11 +434,17 @@
 
         /* arm */
         > aside {
+          background:#fbb529;
+          display: flex;
+          justify-content: center;
           &:nth-of-type(2) {
+            background:#d99711;
+
           }
 
           /* lower arm */
           > div {
+            
             /* hand */
             > div {
             }
@@ -400,14 +460,21 @@
 
           /* leg front */
           > section {
+            background: #f5a912;
+            
+            display: flex;
+            justify-content: center;
             /* back leg */
             &:nth-of-type(2) {
+              background: #ae7402;
             }
 
             /* lower leg */
             > div {
+              
               /* foot */
               > div {
+                
               }
             }
           }
