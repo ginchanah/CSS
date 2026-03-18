@@ -71,6 +71,15 @@
   --transition-time: 1s;
 }
 
+
+@property --root-size {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 1rem;
+}
+
+
+
 @layer basicpoppetje, bienemaja;
 /* @layer bienemaja, basicpoppetje; */
 
@@ -180,8 +189,9 @@ h1 {
 
 
 
-
- /* checkbox/toggle/slider */
+/* ****** */
+/* MARK: checkbox
+/* ******* */
 input[type="checkbox"] {
   appearance: none;
   height: 1rem;
@@ -214,6 +224,67 @@ input[type="checkbox"] {
       background-color: var(--color-background-accent-green-default);
   }
 }
+
+
+/* ****** */
+/* MARK: Easter Eggs
+/* ******* */
+
+footer {
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    appearance: none;
+    background-color: transparent;
+    border-color: transparent;
+    width: 9rem;
+    aspect-ratio: 1;
+  }
+}
+
+:root:has(button:first-of-type:hover), :root:has(button:first-of-type:focus) {
+  --root-size: 0.5rem;
+}
+
+/* set fly away animation on wings */
+body:has(button:nth-of-type(2):hover) main > div:nth-of-type(2) > div:first-of-type::before, body:has(button:nth-of-type(2):focus) main > div:nth-of-type(2) > div:first-of-type::before {
+  animation-name: flyAwayWings;
+  animation-duration: 0.3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes flyAwayWings {
+  0% {
+      transform:  rotate3d(1, 1, 1, 0deg); 
+    }
+  50% {
+    transform:  rotate3d(1, 1, 1, 30deg); 
+  }
+  100% {
+      transform:  rotate3d(1, 1, 1, 0deg); 
+    }
+}
+
+/* set fly away translation on body */
+body:has(button:nth-of-type(2):hover) main > div:nth-of-type(2), body:has(button:nth-of-type(2):focus) main > div:nth-of-type(2) {
+  animation-name: flyAwayBody;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+
+  transform: translateX(0vw) translateY(0vh);
+}
+@keyframes flyAwayBody {
+  0% {
+    transform: translateX(0vw) translateY(0vh);
+  }
+  100% {
+    transform: translateX(60vw) translateY(-70vh);
+  }
+}
+
 
 /* *** */
 /*MARK: Layer basic
@@ -301,18 +372,18 @@ input[type="checkbox"] {
 
   /* main form */
   main {
-    height: calc(var(--root-size) * 50);
+    height: 60vh;
     display: grid;
     justify-items: center;
     position: relative;
 
     /* body */
     > div:nth-of-type(2) {
-      align-self: end;
+      align-self: center;
       display: grid;
       justify-items: center;
       position: relative;
-      height: var(--whole-body-height);
+      height: calc(var(--whole-body-height)-var(--whole-head-length));
       width: var(--torso-width);
 
       /* upper body */

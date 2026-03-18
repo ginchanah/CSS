@@ -126,6 +126,7 @@ What did I do today?
 ![wings](assets/readme-images/wings.png)
 - I looked online what kind of open source variable fonts there are and I found RobotoFlex so I decided to use that in my project. 
 ![variablefont](assets/readme-images/variablefonts.png)
+- easter eggs fly away and smaller!!!!!!
 
 How long did it take?
 - the whole day
