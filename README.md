@@ -71,11 +71,17 @@ What will I do tomorrow?
 
 
 ## Week 4
-### Dag 4
+### Day 4
 What did I do today?
 - I animated!! and first I started by using keyframes, but after following Sannes workshop about container queries, I decided to use a slider and transform the skeleton with the values of my slider. So I did that the whole day and I finally have 3 steps in my silly walk animated and transformed!!
-- I did get really frustrated again because this whole subject long I had problems with the z-index and skeleton structure and then I animated and then I realized there was a better way with properties and did it all over again and then I decided on the slider transforms and did it all over AGAIN. So it feels like I am not very far, and only the last hour or so have I productively worked on doing something that I can probably just use for my final product, UNCHANGED.
-This really is a learning process.
+- I did get really frustrated again because this whole subject long I had problems with the z-index and skeleton structure and then I animated.First I added a bunch of keyframes for every step but that took ages!!
+![wronganimation](assets/readme-images/wrong-animation.png)
+ And then I realized through talking with Nienke there was a better way with properties and did it all over again and then I decided on the slider transforms and did it all over AGAIN. So it feels like I am not very far, and only the last hour or so have I productively worked on doing something that I can probably just use for my final product, UNCHANGED.
+![properties](assets/readme-images/properties.png)
+
+This really is a learning process. 
+
+
 - I also followed Cyds workshop "gekke dingen in CSS"
 
 How long did it take
@@ -88,13 +94,13 @@ What will I do tomorrow?
 - more steps to my silly walk, hopefully the styling for my Maja the Bee mode
 
 
-### Dag 4
+### Day 5
 What did I do today?
 - Today I worked on step 3 until 11 of my silly walk and finished it! It is now completely slide and transformable!
 - I also followed the maths and variable fonts workshops
 - Inbetween and afterwards I also worked on implementing a font (I used comic style fonts because I am using a cartoon character) and I also started working on my design for my second mode, not the skeleton mode but Maja the Bee! Finally.
-![skeleton3](/assets/readme-images/skeleton-final.png)
-![majathebee](/assets/readme-images/majabegin.png)
+![skeleton3](assets/readme-images/skeleton-final.png)
+![majathebee](assets/readme-images/majabegin.png)
 
 How long did it take?
 - Workshops: 2 hours
@@ -106,7 +112,26 @@ What did I learn?
 What will I do tomorrow? 
 - Finish my Maja the Bee styling, do some more fun stuff with fonts, maybe add a background
 
+## Weekly check-out
+During the check-out, Sanne recommended that I could add a second mode in which the animation is not driven by the user input but is just running by itself. Also that I could add some animation to the wings and a possibility for easter eggs with which I could rotate my bee. So I'll have to see what of that I can incorporate next week! I also still need to add something to make my font more fun and possibly interactive. Because this is all i have for now:
+![font](assets/readme-images/font.png)
 
+## Week 5
+### Day 6
+What did I do today?
+- I added a checkbox (and styled it as a slider) for my second mode, which I made an animation mode. For that I translated my transforms into keyframes. That didn't work properly in the beginning but apparently that is because defined my properties the value of 0 sometimes, when I should have given it 0deg. But I changed all that and now it works!
+![animation](assets/readme-images/animation-mode.png)
+![keyframes](assets/readme-images/keyframes.png)
+- I also added a small animation to make the eyes blink and the wings flap every now and then. I wanted to move the two wings seperately, but I made the second wing a box shadow so it moves with the first one..oh well.
+![wings](assets/readme-images/wings.png)
+- I looked online what kind of open source variable fonts there are and I found RobotoFlex so I decided to use that in my project. 
+![variablefont](assets/readme-images/variablefonts.png)
+
+How long did it take?
+- the whole day
+
+What did I learn?
+- How to work with variable fonts! I had never done that before and it was interesting to see what kind of properties I could play with and how.
 
 
 ## Bronnen
@@ -116,12 +141,10 @@ What will I do tomorrow?
 - Walk cycle by Sanne: https://codepen.io/shooft/pen/myrbrGa
 - Fancy border radius: https://9elements.github.io/fancy-border-radius/#70.51.68.51--474.374
 - :after border https://stackoverflow.com/questions/28033616/adding-box-shadow-to-a-after-pseudo-element
+- Variable fonts https://v-fonts.com/fonts/roboto-flex
 
 
 
-# To-Do
-- Typografie, sensational title 
-- two themes
 
 
 

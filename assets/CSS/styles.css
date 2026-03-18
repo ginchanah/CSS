@@ -79,6 +79,141 @@
     --root-size: 0.8rem;
   }
 }
+/* *********** */
+/* MARK: font 
+/* *********** */
+@font-face { 
+  font-family: RobotoFlex; 
+  src: url('RobotoFlex.ttf') format("truetype"); 
+  
+}
+
+/* weight 100-1000 */
+@property --wght {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 500;
+}
+
+/* width 25-151 */
+@property --wdth {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 100;
+}
+
+/* dikte ofzo 8-144 */
+@property --opsz {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 100;
+}
+
+/* italic -10-0 */
+@property --slnt {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+/* height of lowercase letters 416-570 */
+@property --YTLC {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 416;
+}
+
+/* height of uppercase letters 528-760 */
+@property --YTUC {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 650;
+}
+
+/* height lowercase linie nach oben 629-854 */
+@property --YTAS {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 629;
+}
+
+/* height lowercase linie nach unten -305--98 */
+@property --YTDE {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: -200;
+}
+
+/* width of right side 27-175 */
+@property --XOPQ {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 100;
+}
+
+h1 {
+  font-variation-settings:
+    /* weight 100-1000 */
+    "wght" var(--wght),
+    /* width 25-151 */
+    "wdth" var(--wdth),
+    /* dikte ofzo 8-144 */
+    "opsz" var(--opsz),
+    /* italic -10-0 */
+    "slnt" var(--slnt),
+    /* height of lowercase letters 416-570 */
+    "YTLC" var(--YTLC),
+    /* height of uppercase letters 528-760 */
+    "YTUC" var(--YTUC),
+    /* height lowercase linie nach oben 629-854 */
+    "YTAS" var(--YTAS),
+    /* height lowercase linie nach unten -305--98 */
+    "YTDE" var(--YTDE),
+    /* width of right side 27-175 */
+    "XOPQ" var(--XOPQ);
+    
+  transition: font-variation-settings var(--transition-time);
+  
+}
+
+
+
+
+
+
+ /* checkbox/toggle/slider */
+input[type="checkbox"] {
+  appearance: none;
+  height: 1rem;
+  width: 2rem;
+  border: 1px solid var(--color-black);
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  /* bolletje */
+  &::before {
+      content: "🐝";
+      display: block;
+      position: absolute;
+      transition: 0.2s;
+      height: 0.8rem;
+      aspect-ratio: 1;
+      border-radius: 99rem;
+      background-color: var(--color-white);
+      left: 0.05rem;
+      transition: left 0.2s;
+
+  }
+
+  &:checked::before {
+      left:1rem;
+  }
+
+  &:checked {
+      background-color: var(--color-background-accent-green-default);
+  }
+}
 
 /* *** */
 /*MARK: Layer basic
@@ -94,7 +229,7 @@
   h1,
   h2,
   h3 {
-    font-family: "ccclobberintimesmooth", "Comic Sans MS", Arial;
+    font-family: 'RobotoFlex' ,"ccclobberintimesmooth", "Comic Sans MS", Arial;
   }
 
   ::after,
@@ -124,19 +259,20 @@
 
     border: solid 2px black;
     padding: 1rem;
+    padding-bottom: 0.5rem;
     border-radius: 50rem;
 
     &::after {
-      bottom: -2em;
-      right: calc(50% - 2em);
+      bottom: -1.5em;
+      right: calc(50% - 1.5em);
       content: "";
       position: absolute;
       width: 0;
       height: 0;
-      border-left: 2em solid transparent;
-      border-right: 2em solid transparent;
+      border-left: 1.5em solid transparent;
+      border-right: 1.5em solid transparent;
 
-      border-top: 2em solid white;
+      border-top: 1.5em solid white;
       box-shadow: inset 1px 1px 1px 4px black;
       filter: drop-shadow(0px 2px 0px black);
     }
@@ -146,6 +282,8 @@
       width: clamp(1rem, 40vw, 20rem);
       accent-color: var(--body-color);
     }
+
+   
   }
 
   /* header */
@@ -157,8 +295,6 @@
       text-align: center;
       text-shadow: 3px 3px 0px orange;
 
-      span {
-      }
     }
     
   }
@@ -348,11 +484,12 @@
           width: var(--wing-width);
           height: calc(var(--root-size) * 6);
           rotate: 90deg;
-          background: transparent;
+          background: var(--color-white);
           border: var(--maja-border);
           position: absolute;
           left: calc(var(--wing-width) * -1 + var(--root-size));
           box-shadow: calc(var(--wing-width) * -0.2) 0;
+          z-index: 2;
         }
 
         /* head */
@@ -396,13 +533,13 @@
 
             box-shadow: calc(var(--root-size)*1.9) 0 0 0 var(--color-black);
           }
-
+          /* eyes */
           div {
               display: block;
               position: absolute;
               width: calc(var(--root-size)*0.5);
               height: calc(var(--root-size)*0.5);
-              background: var(--color-black);
+              background: transparent;
               top: 40%;
               right: 10%;
 
@@ -415,6 +552,11 @@
               calc(var(--root-size)*-3) calc(var(--root-size)*-1) 0 calc(var(--root-size)*1.15) var(--color-black),
               calc(var(--root-size)*-1.6) calc(var(--root-size)*-1.5) 0 calc(var(--root-size)*1.15) var(--color-black),
               calc(var(--root-size)*-3.7) calc(var(--root-size)*0.7) 0 calc(var(--root-size)*1.25) var(--color-black);
+          }
+
+          div:nth-of-type(2) {
+            box-shadow: none;
+            background: var(--color-black);
           }
         }
 
@@ -493,17 +635,23 @@
 
 @property --bodyMovementTranslateY {
   syntax: "<length-percentage>";
-  inherits: false;
+  inherits: true;
   initial-value: 0px;
 }
 
 @property --bodyMovementTranslateX {
   syntax: "<length-percentage>";
-  inherits: false;
+  inherits: true;
   initial-value: 0px;
 }
 
 @property --whole-body-rotation {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+@property --rotation {
   syntax: "<angle>";
   inherits: true;
   initial-value: 0deg;
@@ -647,6 +795,9 @@ section:nth-of-type(2) > div > div {
   initial-value: 0deg;
 }
 
+
+
+
 /* front upper arm */
 aside:first-of-type {
   transform: rotate(var(--upper-arm-rotation));
@@ -679,7 +830,51 @@ aside:nth-of-type(2) > div {
 /*  MARK: stap 1 
 /* ***** */
 
+body {
+    /* weight 100-1000 */
+    --wght: 500;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: 0;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 650;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -200;
+    /* width of right side 27-175 */
+    --XOPQ: 100;
+  }
+
 @container style(--walk >= 1) {
+
+  /* Font */
+  body {
+    /* weight 100-1000 */
+    --wght: 700;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: 0;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 760;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 700;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -200;
+    /* width of right side 27-175 */
+    --XOPQ: 100;
+  }
+
   /* body transform */
   main > div:nth-of-type(2) > div:first-of-type {
     --bodyMovementTranslateY: calc(var(--root-size) * 2);
@@ -721,6 +916,28 @@ aside:nth-of-type(2) > div {
 /* ***** */
 
 @container style(--walk >= 2) {
+  /* Font */
+  body {
+    /* weight 100-1000 */
+    --wght: 700;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: 0;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 528;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -98;
+    /* width of right side 27-175 */
+    --XOPQ: 100;
+  }
+
   /* body transform */
   main > div:nth-of-type(2) > div:first-of-type {
     --bodyMovementTranslateY: calc(var(--root-size) * 8);
@@ -780,6 +997,28 @@ aside:nth-of-type(2) > div {
 /* ***** */
 
 @container style(--walk >= 3) {
+  /* Font */
+  body {
+    /* weight 100-1000 */
+    --wght: 300;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: 0;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 528;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -98;
+    /* width of right side 27-175 */
+    --XOPQ: 175;
+  }
+
   /* body transform */
   main > div:nth-of-type(2) > div:first-of-type {
     --bodyMovementTranslateY: calc(var(--root-size) * 2);
@@ -840,6 +1079,28 @@ aside:nth-of-type(2) > div {
 /* ***** */
 
 @container style(--walk >= 4) {
+   /* Font */
+  body {
+    /* weight 100-1000 */
+    --wght: 300;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: -10;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 528;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -98;
+    /* width of right side 27-175 */
+    --XOPQ: 175;
+  }
+
   /* body transform */
   main > div:nth-of-type(2) > div:first-of-type {
     --rotation: 20deg;
@@ -903,6 +1164,28 @@ aside:nth-of-type(2) > div {
 /* ***** */
 
 @container style(--walk >= 5) {
+     /* Font */
+  body {
+    /* weight 100-1000 */
+    --wght: 500;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: 0;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 528;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -98;
+    /* width of right side 27-175 */
+    --XOPQ: 100;
+  }
+
   /* body transform */
   main > div:nth-of-type(2) > div:first-of-type {
     --rotation: 0deg;
@@ -971,6 +1254,27 @@ aside:nth-of-type(2) > div {
 /* ***** */
 
 @container style(--walk >= 6) {
+     /* Font */
+  body {
+    /* weight 100-1000 */
+    --wght: 500;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: 0;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 570;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 528;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -98;
+    /* width of right side 27-175 */
+    --XOPQ: 100;
+  }
   /* body transform */
   main > div:nth-of-type(2) > div:first-of-type {
     --rotation: 0deg;
@@ -1039,6 +1343,28 @@ aside:nth-of-type(2) > div {
 /* ***** */
 
 @container style(--walk >= 7) {
+       /* Font */
+  body {
+    /* weight 100-1000 */
+    --wght: 500;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: -10;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 528;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -305;
+    /* width of right side 27-175 */
+    --XOPQ: 100;
+  }
+
   /* body transform */
   main > div:nth-of-type(2) > div:first-of-type {
     --rotation: 0deg;
@@ -1107,6 +1433,27 @@ aside:nth-of-type(2) > div {
 /* ***** */
 
 @container style(--walk >= 8) {
+        /* Font */
+  body {
+    /* weight 100-1000 */
+    --wght: 500;
+    /* width 25-151 */
+    --wdth: 151;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: 0;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 528;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -305;
+    /* width of right side 27-175 */
+    --XOPQ: 175;
+  }
   /* body transform */
   main > div:nth-of-type(2) > div:first-of-type {
     --rotation: 0deg;
@@ -1175,6 +1522,27 @@ aside:nth-of-type(2) > div {
 /* ***** */
 
 @container style(--walk >= 9) {
+        /* Font */
+  body {
+    /* weight 100-1000 */
+    --wght: 500;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: -10;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 528;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -305;
+    /* width of right side 27-175 */
+    --XOPQ: 175;
+  }
   /* body transform */
   main > div:nth-of-type(2) > div:first-of-type {
     --rotation: 30deg;
@@ -1244,6 +1612,27 @@ aside:nth-of-type(2) > div {
 /* ***** */
 
 @container style(--walk >= 10) {
+        /* Font */
+  body {
+    /* weight 100-1000 */
+    --wght: 800;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: 0;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 760;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 854;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -305;
+    /* width of right side 27-175 */
+    --XOPQ: 175;
+  }
   /* body transform */
   main > div:nth-of-type(2) > div:first-of-type {
     --rotation: 10deg;
@@ -1313,6 +1702,26 @@ aside:nth-of-type(2) > div {
 /* ***** */
 
 @container style(--walk >= 11) {
+  body {
+    /* weight 100-1000 */
+    --wght: 500;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: 0;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 650;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -200;
+    /* width of right side 27-175 */
+    --XOPQ: 100;
+  }
   /* body transform */
   main > div:nth-of-type(2) > div:first-of-type {
     --rotation: 10deg;
@@ -1374,5 +1783,542 @@ aside:nth-of-type(2) > div {
     > div {
       --lower-arm-back-rotation: 0deg;
     }
+  }
+}
+
+/* ************* */
+/* MARK: Keyframes
+/* ************ */
+
+
+
+html:has(input[type="checkbox"]:checked) {
+
+    * {
+      transition: none !important;
+    }
+
+    body {
+
+      input[type="range"] {
+          display: none;
+      }
+
+      --walk: 0;
+
+      animation-name: myWalk;
+      animation-duration: 13s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    
+}
+
+@keyframes myWalk {
+  /* stap 0 */
+  0% {
+    --rotation: 0deg;
+    --bodyMovementTranslateY: 0px;
+    --bodyMovementTranslateX: 0px;
+    --whole-body-rotation: var(--rotation);
+    --upper-leg-rotation: 0deg;
+    --translate-y-upper-leg: 0px;
+    --translate-x-upper-leg: 0px;
+    --lower-leg-rotation: 0deg;
+    --foot-front-rotation: 0deg;
+    --3d-rotation: 0deg;
+    --upper-leg-back-rotation: 0deg;
+    --translate-y-upper-leg-back: 0px;
+    --lower-leg-back-rotation: 0deg;
+    --foot-back-rotation: 0deg;
+    --upper-arm-rotation: 0deg;
+    --lower-arm-rotation: 0deg;
+    --upper-arm-back-rotation: 0deg;
+    --lower-arm-back-rotation: 0deg;
+
+    /* weight 100-1000 */
+    --wght: 500;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: 0;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 650;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -200;
+    /* width of right side 27-175 */
+    --XOPQ: 100;
+
+  }
+  /* stap 1 */
+  9% {
+    --bodyMovementTranslateY: calc(var(--root-size) * 2);
+    --bodyMovementTranslateX: calc(var(--root-size) * 0.5);
+    --upper-leg-rotation: -120deg;
+    --translate-y-upper-leg: calc(var(--translate-walk-height) * -1);
+    --translate-x-upper-leg: calc(var(--translate-walk-height) * -1);
+    --lower-leg-rotation: 120deg;
+    --upper-leg-back-rotation: -10deg;
+    --translate-y-upper-leg-back: calc(var(--root-size) * -2);
+    --lower-leg-back-rotation: 20deg;
+    --foot-back-rotation: -10deg;
+
+    /* weight 100-1000 */
+    --wght: 700;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: 0;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 760;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 700;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -200;
+    /* width of right side 27-175 */
+    --XOPQ: 100;
+
+  }
+  /* stap 2 */
+  18% {
+    --bodyMovementTranslateY: calc(var(--root-size) * 8);
+    --upper-leg-rotation: -90deg;
+    --translate-y-upper-leg: calc(var(--translate-walk-height) * -1);
+    --translate-x-upper-leg: calc(var(--translate-walk-height) * -1);
+    --lower-leg-rotation: 120deg;
+    --upper-leg-back-rotation: -40deg;
+    --translate-y-upper-leg-back: 0px;
+    --lower-leg-back-rotation: 140deg;
+    --foot-back-rotation: -10deg;
+    --upper-arm-rotation: 70deg;
+    --lower-arm-rotation: -120deg;
+    --upper-arm-back-rotation: -70deg;
+    --lower-arm-back-rotation: -120deg;
+
+    /* weight 100-1000 */
+    --wght: 700;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: 0;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 528;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -98;
+    /* width of right side 27-175 */
+    --XOPQ: 100;
+
+  }
+  /* stap 3 */
+  27% {
+    --bodyMovementTranslateY: calc(var(--root-size) * 2);
+    --bodyMovementTranslateX: calc(var(--root-size) * 0.5);
+    --upper-leg-rotation: -120deg;
+    --translate-y-upper-leg: calc(var(--translate-walk-height) * -1);
+    --translate-x-upper-leg: calc(var(--translate-walk-height) * -1);
+    --lower-leg-rotation: 30deg;
+    --upper-leg-back-rotation: -10deg;
+    --translate-y-upper-leg-back: calc(var(--root-size) * -2);
+    --lower-leg-back-rotation: 20deg;
+    --foot-back-rotation: -10deg;
+    --upper-arm-rotation: -70deg;
+    --lower-arm-rotation: -120deg;
+    --upper-arm-back-rotation: 70deg;
+    --lower-arm-back-rotation: -120deg;
+
+    /* weight 100-1000 */
+    --wght: 300;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: 0;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 528;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -98;
+    /* width of right side 27-175 */
+    --XOPQ: 175;
+
+  }
+  /* stap 4 */
+  36% {
+    --rotation: 20deg;
+    --bodyMovementTranslateY: calc(var(--root-size) * 2);
+    --bodyMovementTranslateX: calc(var(--root-size) * 0.5);
+    --whole-body-rotation: var(--rotation);
+    --upper-leg-rotation: -10deg;
+    --translate-y-upper-leg: 0px;
+    --translate-x-upper-leg: 0px;
+    --lower-leg-rotation: 100deg;
+    --upper-leg-back-rotation: calc(var(--rotation) * -1 - 10deg);
+    --translate-y-upper-leg-back: calc(var(--root-size) * -2);
+    --lower-leg-back-rotation: 20deg;
+    --foot-back-rotation: -10deg;
+    --upper-arm-rotation: 0deg;
+    --lower-arm-rotation: 0deg;
+    --upper-arm-back-rotation: 0deg;
+    --lower-arm-back-rotation: 0deg;
+
+     /* weight 100-1000 */
+    --wght: 300;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: -10;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 528;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -98;
+    /* width of right side 27-175 */
+    --XOPQ: 175;
+
+  }
+  /* stap 5 */
+  45% {
+    --rotation: 0deg;
+    --bodyMovementTranslateY: 0px;
+    --bodyMovementTranslateX: 0px;
+    --whole-body-rotation: var(--rotation);
+    --upper-leg-rotation: 0deg;
+    --translate-y-upper-leg: 0px;
+    --translate-x-upper-leg: 0px;
+    --lower-leg-rotation: 0deg;
+    --foot-front-rotation: 0deg;
+    --upper-leg-back-rotation: 0deg;
+    --translate-y-upper-leg-back: 0px;
+    --lower-leg-back-rotation: 0deg;
+    --foot-back-rotation: 0deg;
+    --upper-arm-rotation: 0deg;
+    --lower-arm-rotation: 0deg;
+    --upper-arm-back-rotation: 0deg;
+    --lower-arm-back-rotation: 0deg;
+
+    /* weight 100-1000 */
+    --wght: 500;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: 0;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 528;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -98;
+    /* width of right side 27-175 */
+    --XOPQ: 100;
+
+  }
+  /* stap 6 */
+  54% {
+    --rotation: 0deg;
+    --bodyMovementTranslateY: 0px;
+    --bodyMovementTranslateX: calc(var(--root-size) * 2);
+    --whole-body-rotation: var(--rotation);
+    --upper-leg-rotation: 10deg;
+    --translate-y-upper-leg: 0px;
+    --translate-x-upper-leg: 0px;
+    --lower-leg-rotation: 0deg;
+    --foot-front-rotation: -10deg;
+    --upper-leg-back-rotation: -90deg;
+    --translate-y-upper-leg-back: 0px;
+    --lower-leg-back-rotation: 100deg;
+    --foot-back-rotation: 30deg;
+    --upper-arm-rotation: 0deg;
+    --lower-arm-rotation: 0deg;
+    --upper-arm-back-rotation: 0deg;
+    --lower-arm-back-rotation: 0deg;
+
+    /* weight 100-1000 */
+    --wght: 500;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: 0;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 570;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 528;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -98;
+    /* width of right side 27-175 */
+    --XOPQ: 100;
+
+  }
+  /* stap 7 */
+  63% {
+    --rotation: 0deg;
+    --bodyMovementTranslateY: calc(var(--root-size) * 6);
+    --bodyMovementTranslateX: calc(var(--root-size) * -6);
+    --whole-body-rotation: var(--rotation);
+    --upper-leg-rotation: -60deg;
+    --translate-y-upper-leg: 0px;
+    --translate-x-upper-leg: 0px;
+    --lower-leg-rotation: 100deg;
+    --foot-front-rotation: -40deg;
+    --upper-leg-back-rotation: -90deg;
+    --translate-y-upper-leg-back: 0px;
+    --lower-leg-back-rotation: 40deg;
+    --foot-back-rotation: 30deg;
+    --upper-arm-rotation: 0deg;
+    --lower-arm-rotation: -90deg;
+    --upper-arm-back-rotation: 30deg;
+    --lower-arm-back-rotation: 0deg;
+
+    /* weight 100-1000 */
+    --wght: 500;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: -10;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 528;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -305;
+    /* width of right side 27-175 */
+    --XOPQ: 100;
+
+  }
+  /* stap 8 */
+  72% {
+    --rotation: 0deg;
+    --bodyMovementTranslateY: calc(var(--root-size) * 6);
+    --bodyMovementTranslateX: calc(var(--root-size) * 5);
+    --whole-body-rotation: var(--rotation);
+    --upper-leg-rotation: 50deg;
+    --translate-y-upper-leg: 0px;
+    --translate-x-upper-leg: 0px;
+    --lower-leg-rotation: 0deg;
+    --foot-front-rotation: -50deg;
+    --upper-leg-back-rotation: -80deg;
+    --translate-y-upper-leg-back: 0px;
+    --lower-leg-back-rotation: 100deg;
+    --foot-back-rotation: 60deg;
+    --upper-arm-rotation: 100deg;
+    --lower-arm-rotation: -90deg;
+    --upper-arm-back-rotation: 110deg;
+    --lower-arm-back-rotation: -80deg;
+
+    /* weight 100-1000 */
+    --wght: 500;
+    /* width 25-151 */
+    --wdth: 151;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: 0;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 528;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -305;
+    /* width of right side 27-175 */
+    --XOPQ: 175;
+
+  }
+  /* stap 9 */
+  81% {
+    --rotation: 30deg;
+    --bodyMovementTranslateY: calc(var(--root-size) * 1);
+    --bodyMovementTranslateX: calc(var(--root-size) * -3);
+    --whole-body-rotation: var(--rotation);
+    --upper-leg-rotation: calc(var(--rotation) * -1);
+    --translate-y-upper-leg: 0px;
+    --translate-x-upper-leg: 0px;
+    --lower-leg-rotation: 0deg;
+    --3d-rotation: 90deg;
+    --upper-leg-back-rotation: 30deg;
+    --translate-y-upper-leg-back: calc(var(--root-size) * -2);
+    --foot-front-rotation: 0deg;
+    --lower-leg-back-rotation: 20deg;
+    --foot-back-rotation: -10deg;
+    --upper-arm-rotation: -30deg;
+    --lower-arm-rotation: -0deg;
+    --upper-arm-back-rotation: -35deg;
+    --lower-arm-back-rotation: 0deg;
+
+    /* weight 100-1000 */
+    --wght: 500;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: -10;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 528;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -305;
+    /* width of right side 27-175 */
+    --XOPQ: 175;
+
+  }
+  /* stap 10 */
+  90% {
+    --rotation: 10deg;
+    --bodyMovementTranslateY: calc(var(--root-size) * -1.5);
+    --bodyMovementTranslateX: calc(var(--root-size) * -3);
+    --whole-body-rotation: var(--rotation);
+    --upper-leg-rotation: -30deg;
+    --translate-y-upper-leg: 0px;
+    --translate-x-upper-leg: 0px;
+    --lower-leg-rotation: 30deg;
+    --foot-front-rotation: 40deg;
+    --3d-rotation: 0deg;
+    --upper-leg-back-rotation: -130deg;
+    --translate-y-upper-leg-back: calc(var(--root-size) * -2);
+    --lower-leg-back-rotation: 20deg;
+    --foot-back-rotation: 40deg;
+    --upper-arm-rotation: -30deg;
+    --lower-arm-rotation: -0deg;
+    --upper-arm-back-rotation: -35deg;
+    --lower-arm-back-rotation: 0deg;
+
+    /* weight 100-1000 */
+    --wght: 800;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: 0;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 760;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 854;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -305;
+    /* width of right side 27-175 */
+    --XOPQ: 175;
+
+  }
+
+  /* stap 11 */
+  100% {
+    --rotation: 0deg;
+    --bodyMovementTranslateY: 0px;
+    --bodyMovementTranslateX: 0px;
+    --whole-body-rotation: var(--rotation);
+    --upper-leg-rotation: 0deg;
+    --translate-y-upper-leg: 0px;
+    --translate-x-upper-leg: 0px;
+    --lower-leg-rotation: 0deg;
+    --foot-front-rotation: 0deg;
+    --3d-rotation: 0deg;
+    --upper-leg-back-rotation: 0deg;
+    --translate-y-upper-leg-back: 0px;
+    --lower-leg-back-rotation: 0deg;
+    --foot-back-rotation: 0deg;
+    --upper-arm-rotation: 0deg;
+    --lower-arm-rotation: 0deg;
+    --upper-arm-back-rotation: 0deg;
+    --lower-arm-back-rotation: 0deg;
+
+    /* weight 100-1000 */
+    --wght: 500;
+    /* width 25-151 */
+    --wdth: 100;
+    /* dikte ofzo 8-144 */
+    --opsz: 100;
+    /* italic -10-0 */
+    --slnt: 0;
+    /* height of lowercase letters 416-570 */
+    --YTLC: 416;
+    /* height of uppercase letters 528-760 */
+    --YTUC: 650;
+    /* height lowercase linie nach oben 629-854 */
+    --YTAS: 629;
+    /* height lowercase linie nach unten -305--98 */
+    --YTDE: -200;
+    /* width of right side 27-175 */
+    --XOPQ: 100;
+
+  }
+}
+
+
+/* eyes blink */
+
+main header > div:nth-of-type(2) {
+  animation-name: eyeBlink;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes eyeBlink {
+  0%, 90%, 100% {
+    transform: scaleY(1); 
+  }
+  95% {
+    transform: scaleY(0); 
+  }
+}
+
+/* wings flap */
+main > div:nth-of-type(2) > div:first-of-type::before {
+  animation-name: wingsFlap;
+  animation-duration: 4s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes wingsFlap {
+  0%, 70%, 80%, 90%, 100% {
+    transform:  rotate3d(1, 1, 1, 0deg); 
+  }
+  75%, 85%, 95% {
+    transform:  rotate3d(1, 1, 1, 30deg); 
   }
 }
