@@ -360,6 +360,7 @@
           width: calc(var(--head-width) * 1.2);
           background: var(--maja-body-color);
           border: var(--maja-border);
+          position: absolute;
 
           /* nose, antennas, hair */
           box-shadow: calc(var(--root-size)*2.25) calc(var(--root-size)*0.1) 0 calc(var(--root-size)*-2.1) var(--maja-body-color),
@@ -383,7 +384,9 @@
           /* antennas */
           &::before {
             --height:calc(var(--root-size)*1.2);
+
             position: absolute;
+            display: block;
             content: '';
             top: calc(var(--height) *-0.9);
             left: calc(var(--root-size)*1.4);
