@@ -1,5 +1,5 @@
 :root {
-  --root-size: 1rem;
+  --root-size: 0.9rem;
   /* head */
   --head-width: calc(var(--root-size) * 4);
 
@@ -296,6 +296,9 @@ body:has(button:nth-of-type(2):hover) main > div:nth-of-type(2), body:has(button
   /* **************** */
   /* MARK: general styling 
   /* **************** */
+  body {
+    margin: 0;
+  }
   p,
   label {
     font-family: "comicstrip-mn", "Comic Sans MS", Arial;
@@ -363,8 +366,19 @@ body:has(button:nth-of-type(2):hover) main > div:nth-of-type(2), body:has(button
 
   /* header */
   header {
-    display: flex;
+    display: grid;
     justify-content: center;
+
+    .warning {
+      background-color: var(--maja-body-color);
+      width: 100vw;
+      display: grid;
+      justify-content: center;
+
+      p {
+        margin: 0;
+      }
+    }
 
     h1 {
       text-align: center;
@@ -888,12 +902,18 @@ aside:nth-of-type(2) > div {
 /* MARK: Walk container styles
 /* **************** */
 
+/* hide the error if the container query is not supported */
+@container style(--walk >= 0) {
+  .warning {
+    display: none;
+  }
+}
+
 /* ****** */
 /*  MARK: stap 1 
 /* ***** */
 
 @container style(--walk >= 1) {
-
   /* Font */
   body {
     /* weight 100-1000 */
