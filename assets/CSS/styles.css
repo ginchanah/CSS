@@ -71,6 +71,15 @@
   --transition-time: 1s;
 }
 
+@layer basicpoppetje, bienemaja;
+/* @layer bienemaja, basicpoppetje; */
+
+
+@media (height <= 716px) {
+  :root {
+    --root-size: 0.8rem;
+  }
+}
 
 @property --root-size {
   syntax: "<length-percentage>";
@@ -79,15 +88,6 @@
 }
 
 
-
-@layer basicpoppetje, bienemaja;
-/* @layer bienemaja, basicpoppetje; */
-
-@media (height <= 716px) {
-  :root {
-    --root-size: 0.8rem;
-  }
-}
 /* *********** */
 /* MARK: font 
 /* *********** */
@@ -189,41 +189,6 @@ h1 {
 
 
 
-/* ****** */
-/* MARK: checkbox
-/* ******* */
-input[type="checkbox"] {
-  appearance: none;
-  height: 1rem;
-  width: 2rem;
-  border: 1px solid var(--color-black);
-  position: relative;
-  display: flex;
-  align-items: center;
-
-  /* bolletje */
-  &::before {
-      content: "🐝";
-      display: block;
-      position: absolute;
-      transition: 0.2s;
-      height: 0.8rem;
-      aspect-ratio: 1;
-      border-radius: 99rem;
-      background-color: var(--color-white);
-      left: 0.05rem;
-      transition: left 0.2s;
-
-  }
-
-  &:checked::before {
-      left:1rem;
-  }
-
-  &:checked {
-      background-color: var(--color-background-accent-green-default);
-  }
-}
 
 
 /* ****** */
@@ -233,7 +198,7 @@ input[type="checkbox"] {
 footer {
   display: flex;
   justify-content: space-between;
-
+  
   button {
     appearance: none;
     background-color: transparent;
@@ -257,14 +222,14 @@ body:has(button:nth-of-type(2):hover) main > div:nth-of-type(2) > div:first-of-t
 
 @keyframes flyAwayWings {
   0% {
-      transform:  rotate3d(1, 1, 1, 0deg); 
-    }
+    transform:  rotate3d(1, 1, 1, 0deg); 
+  }
   50% {
     transform:  rotate3d(1, 1, 1, 30deg); 
   }
   100% {
-      transform:  rotate3d(1, 1, 1, 0deg); 
-    }
+    transform:  rotate3d(1, 1, 1, 0deg); 
+  }
 }
 
 /* set fly away translation on body */
@@ -273,7 +238,7 @@ body:has(button:nth-of-type(2):hover) main > div:nth-of-type(2), body:has(button
   animation-duration: 3s;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
-
+  
   transform: translateX(0vw) translateY(0vh);
 }
 @keyframes flyAwayBody {
@@ -285,13 +250,52 @@ body:has(button:nth-of-type(2):hover) main > div:nth-of-type(2), body:has(button
   }
 }
 
-
 /* *** */
 /*MARK: Layer basic
 /* **** */
 
 @layer basicpoppetje {
-  /* general styling */
+  
+  /* ****** */
+  /* MARK: checkbox
+  /* ******* */
+  input[type="checkbox"] {
+    appearance: none;
+    height: 1rem;
+    width: 2rem;
+    border: 1px solid var(--color-black);
+    position: relative;
+    display: flex;
+    align-items: center;
+  
+    /* bolletje */
+    &::before {
+        content: "🐝";
+        display: block;
+        position: absolute;
+        transition: 0.2s;
+        height: 0.8rem;
+        aspect-ratio: 1;
+        border-radius: 99rem;
+        background-color: var(--color-white);
+        left: 0.05rem;
+        transition: left 0.2s;
+  
+    }
+  
+    &:checked::before {
+        left:1rem;
+    }
+  
+    &:checked {
+        background-color: var(--color-background-accent-green-default);
+    }
+  }
+
+
+  /* **************** */
+  /* MARK: general styling 
+  /* **************** */
   p,
   label {
     font-family: "comicstrip-mn", "Comic Sans MS", Arial;
@@ -379,6 +383,11 @@ body:has(button:nth-of-type(2):hover) main > div:nth-of-type(2), body:has(button
 
     /* body */
     > div:nth-of-type(2) {
+
+      h2 {
+        visibility: hidden;
+      }
+
       align-self: center;
       display: grid;
       justify-items: center;
@@ -538,6 +547,7 @@ body:has(button:nth-of-type(2):hover) main > div:nth-of-type(2), body:has(button
 /* **** */
 /* MARK: layer maja
 /* **** */
+/* everything that's different about Maja from the main form */
 
 @layer bienemaja {
   main {
@@ -657,14 +667,6 @@ body:has(button:nth-of-type(2):hover) main > div:nth-of-type(2), body:has(button
             background:#d99711;
 
           }
-
-          /* lower arm */
-          > div {
-            
-            /* hand */
-            > div {
-            }
-          }
         }
 
         /* lower torso */
@@ -683,15 +685,6 @@ body:has(button:nth-of-type(2):hover) main > div:nth-of-type(2), body:has(button
             /* back leg */
             &:nth-of-type(2) {
               background: #ae7402;
-            }
-
-            /* lower leg */
-            > div {
-              
-              /* foot */
-              > div {
-                
-              }
             }
           }
         }
@@ -867,8 +860,6 @@ section:nth-of-type(2) > div > div {
 }
 
 
-
-
 /* front upper arm */
 aside:first-of-type {
   transform: rotate(var(--upper-arm-rotation));
@@ -901,27 +892,6 @@ aside:nth-of-type(2) > div {
 /*  MARK: stap 1 
 /* ***** */
 
-body {
-    /* weight 100-1000 */
-    --wght: 500;
-    /* width 25-151 */
-    --wdth: 100;
-    /* dikte ofzo 8-144 */
-    --opsz: 100;
-    /* italic -10-0 */
-    --slnt: 0;
-    /* height of lowercase letters 416-570 */
-    --YTLC: 416;
-    /* height of uppercase letters 528-760 */
-    --YTUC: 650;
-    /* height lowercase linie nach oben 629-854 */
-    --YTAS: 629;
-    /* height lowercase linie nach unten -305--98 */
-    --YTDE: -200;
-    /* width of right side 27-175 */
-    --XOPQ: 100;
-  }
-
 @container style(--walk >= 1) {
 
   /* Font */
@@ -944,42 +914,33 @@ body {
     --YTDE: -200;
     /* width of right side 27-175 */
     --XOPQ: 100;
-  }
 
-  /* body transform */
-  main > div:nth-of-type(2) > div:first-of-type {
+
+
+
+    /* body transform */
     --bodyMovementTranslateY: calc(var(--root-size) * 2);
     --bodyMovementTranslateX: calc(var(--root-size) * 0.5);
-  }
 
-  /* upper leg front */
-
-  section:nth-of-type(1) {
+    /* upper leg front */
     --upper-leg-rotation: -120deg;
     --translate-y-upper-leg: calc(var(--translate-walk-height) * -1);
     --translate-x-upper-leg: calc(var(--translate-walk-height) * -1);
-  }
-
-  /* lower leg front */
-  section:nth-of-type(1) > div {
+    
+    /* lower leg front */
     --lower-leg-rotation: 120deg;
-  }
-
-  /* upper leg back */
-  section:nth-of-type(2) {
+  
+    /* upper leg back */
     --upper-leg-back-rotation: -10deg;
     --translate-y-upper-leg-back: calc(var(--root-size) * -2);
-  }
-
-  /* lower leg back */
-  section:nth-of-type(2) > div {
+  
+    /* lower leg back */
     --lower-leg-back-rotation: 20deg;
-  }
-
-  /* foot */
-  section:nth-of-type(2) > div > div {
+  
+    /* foot */
     --foot-back-rotation: -10deg;
   }
+
 }
 
 /* ****** */
@@ -1007,60 +968,42 @@ body {
     --YTDE: -98;
     /* width of right side 27-175 */
     --XOPQ: 100;
-  }
 
-  /* body transform */
-  main > div:nth-of-type(2) > div:first-of-type {
+
+
+    /* body transform */
     --bodyMovementTranslateY: calc(var(--root-size) * 8);
-  }
-
-  /* upper leg front */
-
-  section:nth-of-type(1) {
+    
+    /* upper leg front */
     --upper-leg-rotation: -90deg;
     --translate-y-upper-leg: calc(var(--translate-walk-height) * -1);
     --translate-x-upper-leg: calc(var(--translate-walk-height) * -1);
-  }
-
-  /* lower leg front */
-  section:nth-of-type(1) > div {
+  
+    /* lower leg front */
     --lower-leg-rotation: 120deg;
-  }
-
-  /* upper leg back */
-  section:nth-of-type(2) {
+  
+    /* upper leg back */
     --upper-leg-back-rotation: -40deg;
     --translate-y-upper-leg-back: 0;
-  }
-
-  /* lower leg back */
-  section:nth-of-type(2) > div {
+  
+    /* lower leg back */
     --lower-leg-back-rotation: 140deg;
-  }
-
-  /* back foot */
-  section:nth-of-type(2) > div > div {
+  
+    /* back foot */
     --foot-back-rotation: -10deg;
-  }
-
-  /* ARMS */
-  /* front upper arm */
-  aside:first-of-type {
+  
+    /* ARMS */
+    /* front upper arm */
     --upper-arm-rotation: 70deg;
     /* front lower arm */
-    > div {
-      --lower-arm-rotation: -120deg;
-    }
-  }
-
-  /* back upper arm */
-  aside:nth-of-type(2) {
+    --lower-arm-rotation: -120deg;
+  
+    /* back upper arm */
     --upper-arm-back-rotation: -70deg;
     /* back lower arm */
-    > div {
-      --lower-arm-back-rotation: -120deg;
-    }
+    --lower-arm-back-rotation: -120deg;
   }
+
 }
 
 /* ****** */
@@ -1088,61 +1031,43 @@ body {
     --YTDE: -98;
     /* width of right side 27-175 */
     --XOPQ: 175;
-  }
 
-  /* body transform */
-  main > div:nth-of-type(2) > div:first-of-type {
+
+    /* body transform */
     --bodyMovementTranslateY: calc(var(--root-size) * 2);
     --bodyMovementTranslateX: calc(var(--root-size) * 0.5);
-  }
-
-  /* upper leg front */
-
-  section:nth-of-type(1) {
+  
+    /* upper leg front */
     --upper-leg-rotation: -120deg;
     --translate-y-upper-leg: calc(var(--translate-walk-height) * -1);
     --translate-x-upper-leg: calc(var(--translate-walk-height) * -1);
-  }
-
-  /* lower leg front */
-  section:nth-of-type(1) > div {
+  
+    /* lower leg front */
     --lower-leg-rotation: 30deg;
-  }
-
-  /* upper leg back */
-  section:nth-of-type(2) {
+  
+    /* upper leg back */
     --upper-leg-back-rotation: -10deg;
     --translate-y-upper-leg-back: calc(var(--root-size) * -2);
-  }
-
-  /* lower leg back */
-  section:nth-of-type(2) > div {
+  
+    /* lower leg back */
     --lower-leg-back-rotation: 20deg;
-  }
-
-  /* foot */
-  section:nth-of-type(2) > div > div {
+  
+    /* foot */
     --foot-back-rotation: -10deg;
-  }
-
-  /* ARMS */
-  /* front upper arm */
-  aside:first-of-type {
+  
+    /* ARMS */
+    /* front upper arm */
     --upper-arm-rotation: -70deg;
     /* front lower arm */
-    > div {
-      --lower-arm-rotation: -120deg;
-    }
-  }
-
-  /* back upper arm */
-  aside:nth-of-type(2) {
+    --lower-arm-rotation: -120deg;
+  
+    /* back upper arm */
     --upper-arm-back-rotation: 70deg;
     /* back lower arm */
-    > div {
-      --lower-arm-back-rotation: -120deg;
-    }
+    --lower-arm-back-rotation: -120deg;
   }
+
+
 }
 
 /* ****** */
@@ -1170,64 +1095,47 @@ body {
     --YTDE: -98;
     /* width of right side 27-175 */
     --XOPQ: 175;
-  }
 
-  /* body transform */
-  main > div:nth-of-type(2) > div:first-of-type {
+
+
+    /* body transform */
     --rotation: 20deg;
-
+  
     --bodyMovementTranslateY: calc(var(--root-size) * 2);
     --bodyMovementTranslateX: calc(var(--root-size) * 0.5);
     --whole-body-rotation: var(--rotation);
-  }
-
-  /* upper leg front */
-
-  section:nth-of-type(1) {
+  
+    /* upper leg front */
     --upper-leg-rotation: -10deg;
     --translate-y-upper-leg: 0;
     --translate-x-upper-leg: 0;
-  }
-
-  /* lower leg front */
-  section:nth-of-type(1) > div {
+  
+    /* lower leg front */
     --lower-leg-rotation: 100deg;
-  }
-
-  /* upper leg back */
-  section:nth-of-type(2) {
+  
+    /* upper leg back */
     --upper-leg-back-rotation: calc(var(--rotation) * -1 - 10deg);
     --translate-y-upper-leg-back: calc(var(--root-size) * -2);
-  }
-
-  /* lower leg back */
-  section:nth-of-type(2) > div {
+  
+    /* lower leg back */
     --lower-leg-back-rotation: 20deg;
-  }
-
-  /* foot */
-  section:nth-of-type(2) > div > div {
+  
+    /* foot */
     --foot-back-rotation: -10deg;
-  }
-
-  /* ARMS */
-  /* front upper arm */
-  aside:first-of-type {
+  
+    /* ARMS */
+    /* front upper arm */
     --upper-arm-rotation: 0deg;
     /* front lower arm */
-    > div {
-      --lower-arm-rotation: 0deg;
-    }
-  }
-
-  /* back upper arm */
-  aside:nth-of-type(2) {
+    --lower-arm-rotation: 0deg;
+  
+  
+    /* back upper arm */
     --upper-arm-back-rotation: 0deg;
     /* back lower arm */
-    > div {
-      --lower-arm-back-rotation: 0deg;
-    }
+    --lower-arm-back-rotation: 0deg;
   }
+
 }
 
 /* ****** */
@@ -1255,69 +1163,49 @@ body {
     --YTDE: -98;
     /* width of right side 27-175 */
     --XOPQ: 100;
-  }
 
-  /* body transform */
-  main > div:nth-of-type(2) > div:first-of-type {
+
+
+    /* body transform */
     --rotation: 0deg;
-
+  
     --bodyMovementTranslateY: 0;
     --bodyMovementTranslateX: 0;
     --whole-body-rotation: 0;
-  }
-
-  /* upper leg front */
-
-  section:nth-of-type(1) {
+  
+    /* upper leg front */
     --upper-leg-rotation: 0;
     --translate-y-upper-leg: 0;
     --translate-x-upper-leg: 0;
-  }
-
-  /* lower leg front */
-  section:nth-of-type(1) > div {
+  
+    /* lower leg front */
     --lower-leg-rotation: 0deg;
-  }
-
-  /* foot front */
-  section:nth-of-type(1) > div > div {
+  
+    /* foot front */
     --foot-front-rotation: 0deg;
-  }
-
-  /* upper leg back */
-  section:nth-of-type(2) {
+  
+    /* upper leg back */
     --upper-leg-back-rotation: 0deg;
     --translate-y-upper-leg-back: 0deg;
-  }
-
-  /* lower leg back */
-  section:nth-of-type(2) > div {
+  
+    /* lower leg back */
     --lower-leg-back-rotation: 0deg;
-  }
-
-  /* foot back */
-  section:nth-of-type(2) > div > div {
+  
+    /* foot back */
     --foot-back-rotation: 0deg;
-  }
-
-  /* ARMS */
-  /* front upper arm */
-  aside:first-of-type {
+  
+    /* ARMS */
+    /* front upper arm */
     --upper-arm-rotation: 0deg;
     /* front lower arm */
-    > div {
-      --lower-arm-rotation: 0deg;
-    }
-  }
-
-  /* back upper arm */
-  aside:nth-of-type(2) {
+    --lower-arm-rotation: 0deg;
+  
+    /* back upper arm */
     --upper-arm-back-rotation: 0deg;
     /* back lower arm */
-    > div {
-      --lower-arm-back-rotation: 0deg;
-    }
+    --lower-arm-back-rotation: 0deg;
   }
+
 }
 
 /* ****** */
@@ -1345,67 +1233,48 @@ body {
     --YTDE: -98;
     /* width of right side 27-175 */
     --XOPQ: 100;
-  }
-  /* body transform */
-  main > div:nth-of-type(2) > div:first-of-type {
-    --rotation: 0deg;
 
+
+
+    /* body transform */
+    --rotation: 0deg;
+  
     --bodyMovementTranslateY: 0;
     --bodyMovementTranslateX: calc(var(--root-size) * 2);
     --whole-body-rotation: var(--rotation);
-  }
-
-  /* upper leg front */
-
-  section:nth-of-type(1) {
+  
+    /* upper leg front */
     --upper-leg-rotation: 10deg;
     --translate-y-upper-leg: 0;
     --translate-x-upper-leg: 0;
-  }
-
-  /* lower leg front */
-  section:nth-of-type(1) > div {
+  
+    /* lower leg front */
     --lower-leg-rotation: 0deg;
-  }
-
-  /* foot front */
-  section:nth-of-type(1) > div > div {
+  
+    /* foot front */
     --foot-front-rotation: -10deg;
-  }
-
-  /* upper leg back */
-  section:nth-of-type(2) {
+  
+    /* upper leg back */
     --upper-leg-back-rotation: -90deg;
     --translate-y-upper-leg-back: 0deg;
-  }
-
-  /* lower leg back */
-  section:nth-of-type(2) > div {
+  
+    /* lower leg back */
     --lower-leg-back-rotation: 100deg;
-  }
-
-  /* foot back */
-  section:nth-of-type(2) > div > div {
+  
+    /* foot back */
     --foot-back-rotation: 30deg;
-  }
-
-  /* ARMS */
-  /* front upper arm */
-  aside:first-of-type {
+  
+    /* ARMS */
+    /* front upper arm */
     --upper-arm-rotation: 0deg;
     /* front lower arm */
-    > div {
-      --lower-arm-rotation: 0deg;
-    }
-  }
-
-  /* back upper arm */
-  aside:nth-of-type(2) {
+    --lower-arm-rotation: 0deg;
+  
+  
+    /* back upper arm */
     --upper-arm-back-rotation: 0deg;
     /* back lower arm */
-    > div {
-      --lower-arm-back-rotation: 0deg;
-    }
+    --lower-arm-back-rotation: 0deg;
   }
 }
 
@@ -1434,69 +1303,50 @@ body {
     --YTDE: -305;
     /* width of right side 27-175 */
     --XOPQ: 100;
-  }
 
-  /* body transform */
-  main > div:nth-of-type(2) > div:first-of-type {
+
+
+    /* body transform */
     --rotation: 0deg;
-
+  
     --bodyMovementTranslateY: calc(var(--root-size) * 6);
     --bodyMovementTranslateX: calc(var(--root-size) * -6);
     --whole-body-rotation: var(--rotation);
-  }
-
-  /* upper leg front */
-
-  section:nth-of-type(1) {
+  
+    /* upper leg front */
     --upper-leg-rotation: -60deg;
     --translate-y-upper-leg: 0;
     --translate-x-upper-leg: 0;
-  }
-
-  /* lower leg front */
-  section:nth-of-type(1) > div {
+  
+    /* lower leg front */
     --lower-leg-rotation: 100deg;
-  }
-
-  /* foot front */
-  section:nth-of-type(1) > div > div {
+  
+    /* foot front */
     --foot-front-rotation: -40deg;
-  }
-
-  /* upper leg back */
-  section:nth-of-type(2) {
+  
+    /* upper leg back */
     --upper-leg-back-rotation: -90deg;
     --translate-y-upper-leg-back: 0deg;
-  }
-
-  /* lower leg back */
-  section:nth-of-type(2) > div {
+  
+    /* lower leg back */
     --lower-leg-back-rotation: 40deg;
-  }
-
-  /* foot back */
-  section:nth-of-type(2) > div > div {
+  
+    /* foot back */
     --foot-back-rotation: 30deg;
-  }
-
-  /* ARMS */
-  /* front upper arm */
-  aside:first-of-type {
+  
+    /* ARMS */
+    /* front upper arm */
     --upper-arm-rotation: 0deg;
     /* front lower arm */
-    > div {
-      --lower-arm-rotation: -90deg;
-    }
-  }
-
-  /* back upper arm */
-  aside:nth-of-type(2) {
+    --lower-arm-rotation: -90deg;
+  
+    /* back upper arm */
     --upper-arm-back-rotation: 30deg;
     /* back lower arm */
-    > div {
-      --lower-arm-back-rotation: 0deg;
-    }
+    --lower-arm-back-rotation: 0deg;
   }
+
+
 }
 
 /* ****** */
@@ -1524,68 +1374,49 @@ body {
     --YTDE: -305;
     /* width of right side 27-175 */
     --XOPQ: 175;
-  }
-  /* body transform */
-  main > div:nth-of-type(2) > div:first-of-type {
-    --rotation: 0deg;
 
+
+
+    /* body transform */
+    --rotation: 0deg;
+  
     --bodyMovementTranslateY: calc(var(--root-size) * 6);
     --bodyMovementTranslateX: calc(var(--root-size) * 5);
     --whole-body-rotation: var(--rotation);
-  }
-
-  /* upper leg front */
-
-  section:nth-of-type(1) {
+  
+    /* upper leg front */
     --upper-leg-rotation: 50deg;
     --translate-y-upper-leg: 0;
     --translate-x-upper-leg: 0;
-  }
-
-  /* lower leg front */
-  section:nth-of-type(1) > div {
+  
+    /* lower leg front */
     --lower-leg-rotation: 0deg;
-  }
-
-  /* foot front */
-  section:nth-of-type(1) > div > div {
+  
+    /* foot front */
     --foot-front-rotation: -50deg;
-  }
-
-  /* upper leg back */
-  section:nth-of-type(2) {
+  
+    /* upper leg back */
     --upper-leg-back-rotation: -80deg;
     --translate-y-upper-leg-back: 0deg;
-  }
-
-  /* lower leg back */
-  section:nth-of-type(2) > div {
+  
+    /* lower leg back */
     --lower-leg-back-rotation: 100deg;
-  }
-
-  /* foot back */
-  section:nth-of-type(2) > div > div {
+  
+    /* foot back */
     --foot-back-rotation: 60deg;
-  }
-
-  /* ARMS */
-  /* front upper arm */
-  aside:first-of-type {
+  
+    /* ARMS */
+    /* front upper arm */
     --upper-arm-rotation: 100deg;
     /* front lower arm */
-    > div {
-      --lower-arm-rotation: -90deg;
-    }
-  }
-
-  /* back upper arm */
-  aside:nth-of-type(2) {
+    --lower-arm-rotation: -90deg;
+  
+    /* back upper arm */
     --upper-arm-back-rotation: 110deg;
     /* back lower arm */
-    > div {
-      --lower-arm-back-rotation: -80deg;
-    }
+    --lower-arm-back-rotation: -80deg;
   }
+
 }
 
 /* ****** */
@@ -1613,69 +1444,50 @@ body {
     --YTDE: -305;
     /* width of right side 27-175 */
     --XOPQ: 175;
-  }
-  /* body transform */
-  main > div:nth-of-type(2) > div:first-of-type {
-    --rotation: 30deg;
 
+
+
+    /* body transform */
+    --rotation: 30deg;
+  
     --bodyMovementTranslateY: calc(var(--root-size) * 1);
     --bodyMovementTranslateX: calc(var(--root-size) * -3);
     --whole-body-rotation: var(--rotation);
-  }
-
-  /* upper leg front */
-
-  section:nth-of-type(1) {
+  
+    /* upper leg front */
     --upper-leg-rotation: calc(var(--rotation) * -1);
     --translate-y-upper-leg: 0;
     --translate-x-upper-leg: 0;
-  }
-
-  /* lower leg front */
-  section:nth-of-type(1) > div {
+  
+    /* lower leg front */
     --lower-leg-rotation: 0deg;
-  }
-
-  /* upper leg back */
-  section:nth-of-type(2) {
+  
+    /* upper leg back */
     --3d-rotation: 90deg;
     --upper-leg-back-rotation: 30deg;
     --translate-y-upper-leg-back: calc(var(--root-size) * -2);
-  }
-
-  /* foot front */
-  section:nth-of-type(1) > div > div {
+  
+    /* foot front */
     --foot-front-rotation: 0deg;
-  }
-
-  /* lower leg back */
-  section:nth-of-type(2) > div {
+  
+    /* lower leg back */
     --lower-leg-back-rotation: 20deg;
-  }
-
-  /* foot */
-  section:nth-of-type(2) > div > div {
+  
+    /* foot */
     --foot-back-rotation: -10deg;
-  }
-
-  /* ARMS */
-  /* front upper arm */
-  aside:first-of-type {
+  
+    /* ARMS */
+    /* front upper arm */
     --upper-arm-rotation: -30deg;
     /* front lower arm */
-    > div {
-      --lower-arm-rotation: -0deg;
-    }
-  }
-
-  /* back upper arm */
-  aside:nth-of-type(2) {
+    --lower-arm-rotation: -0deg;
+  
+    /* back upper arm */
     --upper-arm-back-rotation: -35deg;
     /* back lower arm */
-    > div {
-      --lower-arm-back-rotation: 0deg;
-    }
+    --lower-arm-back-rotation: 0deg;
   }
+
 }
 
 /* ****** */
@@ -1703,68 +1515,48 @@ body {
     --YTDE: -305;
     /* width of right side 27-175 */
     --XOPQ: 175;
-  }
-  /* body transform */
-  main > div:nth-of-type(2) > div:first-of-type {
-    --rotation: 10deg;
 
+
+
+    /* body transform */
+    --rotation: 10deg;
+  
     --bodyMovementTranslateY: calc(var(--root-size) * -1.5);
     --bodyMovementTranslateX: calc(var(--root-size) * -3);
     --whole-body-rotation: var(--rotation);
-  }
-
-  /* upper leg front */
-
-  section:nth-of-type(1) {
+  
+    /* upper leg front */
     --upper-leg-rotation: -30deg;
     --translate-y-upper-leg: 0;
     --translate-x-upper-leg: 0;
-  }
-
-  /* lower leg front */
-  section:nth-of-type(1) > div {
+  
+    /* lower leg front */
     --lower-leg-rotation: 30deg;
-  }
-
-  /* foot front */
-  section:nth-of-type(1) > div > div {
+  
+    /* foot front */
     --foot-front-rotation: 40deg;
-  }
-
-  /* upper leg back */
-  section:nth-of-type(2) {
+  
+    /* upper leg back */
     --3d-rotation: 0deg;
     --upper-leg-back-rotation: -130deg;
     --translate-y-upper-leg-back: calc(var(--root-size) * -2);
-  }
-
-  /* lower leg back */
-  section:nth-of-type(2) > div {
+  
+    /* lower leg back */
     --lower-leg-back-rotation: 20deg;
-  }
-
-  /* foot */
-  section:nth-of-type(2) > div > div {
+  
+    /* foot */
     --foot-back-rotation: 40deg;
-  }
-
-  /* ARMS */
-  /* front upper arm */
-  aside:first-of-type {
+  
+    /* ARMS */
+    /* front upper arm */
     --upper-arm-rotation: -30deg;
     /* front lower arm */
-    > div {
-      --lower-arm-rotation: -0deg;
-    }
-  }
-
-  /* back upper arm */
-  aside:nth-of-type(2) {
+    --lower-arm-rotation: -0deg;
+  
+    /* back upper arm */
     --upper-arm-back-rotation: -35deg;
     /* back lower arm */
-    > div {
-      --lower-arm-back-rotation: 0deg;
-    }
+    --lower-arm-back-rotation: 0deg;
   }
 }
 
@@ -1792,68 +1584,48 @@ body {
     --YTDE: -200;
     /* width of right side 27-175 */
     --XOPQ: 100;
-  }
-  /* body transform */
-  main > div:nth-of-type(2) > div:first-of-type {
-    --rotation: 10deg;
 
+
+    /* body transform */
+    --rotation: 10deg;
+  
     --bodyMovementTranslateY: 0;
     --bodyMovementTranslateX: 0;
     --whole-body-rotation: 0;
-  }
-
-  /* upper leg front */
-
-  section:nth-of-type(1) {
+  
+    /* upper leg front */
     --upper-leg-rotation: 0;
     --translate-y-upper-leg: 0;
     --translate-x-upper-leg: 0;
-  }
-
-  /* lower leg front */
-  section:nth-of-type(1) > div {
+  
+    /* lower leg front */
     --lower-leg-rotation: 0;
-  }
-
-  /* foot front */
-  section:nth-of-type(1) > div > div {
+  
+    /* foot front */
     --foot-front-rotation: 0;
-  }
-
-  /* upper leg back */
-  section:nth-of-type(2) {
+  
+    /* upper leg back */
     --3d-rotation: 0deg;
     --upper-leg-back-rotation: 0;
     --translate-y-upper-leg-back: 0;
-  }
-
-  /* lower leg back */
-  section:nth-of-type(2) > div {
+  
+    /* lower leg back */
     --lower-leg-back-rotation: 0;
-  }
-
-  /* foot */
-  section:nth-of-type(2) > div > div {
+  
+    /* foot */
     --foot-back-rotation: 0;
-  }
-
-  /* ARMS */
-  /* front upper arm */
-  aside:first-of-type {
+  
+    /* ARMS */
+    /* front upper arm */
     --upper-arm-rotation: 0;
     /* front lower arm */
-    > div {
-      --lower-arm-rotation: 0;
-    }
-  }
-
-  /* back upper arm */
-  aside:nth-of-type(2) {
+    --lower-arm-rotation: 0;
+  
+  
+    /* back upper arm */
     --upper-arm-back-rotation: 0;
     /* back lower arm */
-    > div {
-      --lower-arm-back-rotation: 0deg;
-    }
+    --lower-arm-back-rotation: 0deg;
   }
 }
 
